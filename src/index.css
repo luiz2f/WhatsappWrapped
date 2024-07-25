@@ -1,0 +1,315 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter";
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--background);
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#data {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+img {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+body.stop-transitions * {
+  transition: all 100ms ease-in !important;
+}
+:root {
+  --background: #efebe3;
+  --grey-1: #f0f2f5;
+  --grey-2: #d9dbdf;
+  --grey-3: #54656f;
+  --black-1: #111b21;
+  --green-0: #e7fce3;
+  --green-1: #25d366;
+  --green-0: #008069;
+  --gap-section: 48px;
+  --user-1: rgb(0, 110, 255);
+  --user-2: rgb(255, 0, 179);
+
+  --wds-pink-50: #fff5f8;
+  --wds-pink-50-rgb: 255, 245, 248;
+  --wds-pink-75: #ffebf1;
+  --wds-pink-75-rgb: 255, 235, 241;
+  --wds-pink-100: #ffdae7;
+  --wds-pink-100-rgb: 255, 218, 231;
+  --wds-pink-200: #ffabc7;
+  --wds-pink-200-rgb: 255, 171, 199;
+  --wds-pink-300: #ff72a1;
+  --wds-pink-300-rgb: 255, 114, 161;
+  --wds-pink-400: #ff2e74;
+  --wds-pink-400-rgb: 255, 46, 116;
+  --wds-pink-500: #d42a66;
+  --wds-pink-500-rgb: 212, 42, 102;
+  --wds-pink-600: #a32553;
+  --wds-pink-600-rgb: 163, 37, 83;
+  --wds-pink-700: #6d1e3e;
+  --wds-pink-700-rgb: 109, 30, 62;
+  --wds-pink-800: #36192a;
+  --wds-pink-800-rgb: 54, 25, 42;
+  --wds-red-50: #feeff2;
+  --wds-red-50-rgb: 254, 239, 242;
+  --wds-red-75: #fde8eb;
+  --wds-red-75-rgb: 253, 232, 235;
+  --wds-red-100: #fbd8dc;
+  --wds-red-100-rgb: 251, 216, 220;
+  --wds-red-200: #faa0aa;
+  --wds-red-200-rgb: 250, 160, 170;
+  --wds-red-300: #f15c6d;
+  --wds-red-300-rgb: 241, 92, 109;
+  --wds-red-400: #ea0038;
+  --wds-red-400-rgb: 234, 0, 56;
+  --wds-red-500: #b80531;
+  --wds-red-500-rgb: 184, 5, 49;
+  --wds-red-600: #911435;
+  --wds-red-600-rgb: 145, 20, 53;
+  --wds-red-700: #61182e;
+  --wds-red-700-rgb: 97, 24, 46;
+  --wds-red-800: #321622;
+  --wds-red-800-rgb: 50, 22, 34;
+  --wds-orange-50: #fff7f5;
+  --wds-orange-50-rgb: 255, 247, 245;
+  --wds-orange-75: #ffebe6;
+  --wds-orange-75-rgb: 255, 235, 230;
+  --wds-orange-100: #fee2d8;
+  --wds-orange-100-rgb: 254, 226, 216;
+  --wds-orange-200: #fdc1ad;
+  --wds-orange-200-rgb: 253, 193, 173;
+  --wds-orange-300: #fc9775;
+  --wds-orange-300-rgb: 252, 151, 117;
+  --wds-orange-400: #fa6533;
+  --wds-orange-400-rgb: 250, 101, 51;
+  --wds-orange-500: #c4532d;
+  --wds-orange-500-rgb: 196, 83, 45;
+  --wds-orange-600: #9a4529;
+  --wds-orange-600-rgb: 154, 69, 41;
+  --wds-orange-700: #6b3424;
+  --wds-orange-700-rgb: 107, 52, 36;
+  --wds-orange-800: #35221e;
+  --wds-orange-800-rgb: 53, 34, 30;
+  --wds-yellow-50: #fcfcf5;
+  --wds-yellow-50-rgb: 252, 252, 245;
+  --wds-yellow-75: #fff7e5;
+  --wds-yellow-75-rgb: 255, 247, 229;
+  --wds-yellow-100: #fff0d4;
+  --wds-yellow-100-rgb: 255, 240, 212;
+  --wds-yellow-200: #ffe4af;
+  --wds-yellow-200-rgb: 255, 228, 175;
+  --wds-yellow-300: #ffd279;
+  --wds-yellow-300-rgb: 255, 210, 121;
+  --wds-yellow-400: #ffbc38;
+  --wds-yellow-400-rgb: 255, 188, 56;
+  --wds-yellow-500: #c89631;
+  --wds-yellow-500-rgb: 200, 150, 49;
+  --wds-yellow-600: #9d792c;
+  --wds-yellow-600-rgb: 157, 121, 44;
+  --wds-yellow-700: #6d5726;
+  --wds-yellow-700-rgb: 109, 87, 38;
+  --wds-yellow-800: #36311f;
+  --wds-yellow-800-rgb: 54, 49, 31;
+  --wds-green-50: #f2fdf0;
+  --wds-green-50-rgb: 242, 253, 240;
+  --wds-green-75: #e7fce3;
+  --wds-green-75-rgb: 231, 252, 227;
+  --wds-green-100: #d9fdd3;
+  --wds-green-100-rgb: 217, 253, 211;
+  --wds-green-200: #acfcac;
+  --wds-green-200-rgb: 172, 252, 172;
+  --wds-green-300: #71eb85;
+  --wds-green-300-rgb: 113, 235, 133;
+  --wds-green-400: #25d366;
+  --wds-green-400-rgb: 37, 211, 102;
+  --wds-green-500: #1fa855;
+  --wds-green-500-rgb: 31, 168, 85;
+  --wds-green-600: #1b8748;
+  --wds-green-600-rgb: 27, 135, 72;
+  --wds-green-700: #156038;
+  --wds-green-700-rgb: 21, 96, 56;
+  --wds-green-800: #103527;
+  --wds-green-800-rgb: 16, 53, 39;
+  --wds-emerald-50: #f0fff9;
+  --wds-emerald-50-rgb: 240, 255, 249;
+  --wds-emerald-75: #e1fef2;
+  --wds-emerald-75-rgb: 225, 254, 242;
+  --wds-emerald-100: #d5fded;
+  --wds-emerald-100-rgb: 213, 253, 237;
+  --wds-emerald-200: #b2f5da;
+  --wds-emerald-200-rgb: 178, 245, 218;
+  --wds-emerald-300: #7ae3c3;
+  --wds-emerald-300-rgb: 122, 227, 195;
+  --wds-emerald-400: #06cf9c;
+  --wds-emerald-400-rgb: 6, 207, 156;
+  --wds-emerald-500: #00a884;
+  --wds-emerald-500-rgb: 0, 168, 132;
+  --wds-emerald-600: #008069;
+  --wds-emerald-600-rgb: 0, 128, 105;
+  --wds-emerald-700: #125c4e;
+  --wds-emerald-700-rgb: 18, 92, 78;
+  --wds-emerald-800: #0a332c;
+  --wds-emerald-800-rgb: 10, 51, 44;
+  --wds-teal-50: #edfafa;
+  --wds-teal-50-rgb: 237, 250, 250;
+  --wds-teal-75: #dff6f5;
+  --wds-teal-75-rgb: 223, 246, 245;
+  --wds-teal-100: #cbf2ee;
+  --wds-teal-100-rgb: 203, 242, 238;
+  --wds-teal-200: #95dbd4;
+  --wds-teal-200-rgb: 149, 219, 212;
+  --wds-teal-300: #42c7b8;
+  --wds-teal-300-rgb: 66, 199, 184;
+  --wds-teal-400: #02a698;
+  --wds-teal-400-rgb: 2, 166, 152;
+  --wds-teal-500: #028377;
+  --wds-teal-500-rgb: 2, 131, 119;
+  --wds-teal-600: #046a62;
+  --wds-teal-600-rgb: 4, 106, 98;
+  --wds-teal-700: #074d4a;
+  --wds-teal-700-rgb: 7, 77, 74;
+  --wds-teal-800: #092d2f;
+  --wds-teal-800-rgb: 9, 45, 47;
+  --wds-sky-blue-50: #f2fafe;
+  --wds-sky-blue-50-rgb: 242, 250, 254;
+  --wds-sky-blue-75: #def3fc;
+  --wds-sky-blue-75-rgb: 222, 243, 252;
+  --wds-sky-blue-100: #caecfa;
+  --wds-sky-blue-100-rgb: 202, 236, 250;
+  --wds-sky-blue-200: #93d7f5;
+  --wds-sky-blue-200-rgb: 147, 215, 245;
+  --wds-sky-blue-300: #53bdeb;
+  --wds-sky-blue-300-rgb: 83, 189, 235;
+  --wds-sky-blue-400: #009de2;
+  --wds-sky-blue-400-rgb: 0, 157, 226;
+  --wds-sky-blue-500: #027eb5;
+  --wds-sky-blue-500-rgb: 2, 126, 181;
+  --wds-sky-blue-600: #046692;
+  --wds-sky-blue-600-rgb: 4, 102, 146;
+  --wds-sky-blue-700: #074b6a;
+  --wds-sky-blue-700-rgb: 7, 75, 106;
+  --wds-sky-blue-800: #092c3d;
+  --wds-sky-blue-800-rgb: 9, 44, 61;
+  --wds-cobalt-50: #f2f8ff;
+  --wds-cobalt-50-rgb: 242, 248, 255;
+  --wds-cobalt-75: #e1f0ff;
+  --wds-cobalt-75-rgb: 225, 240, 255;
+  --wds-cobalt-100: #d2e8ff;
+  --wds-cobalt-100-rgb: 210, 232, 255;
+  --wds-cobalt-200: #99cafe;
+  --wds-cobalt-200-rgb: 153, 202, 254;
+  --wds-cobalt-300: #53a6fd;
+  --wds-cobalt-300-rgb: 83, 166, 253;
+  --wds-cobalt-400: #007bfc;
+  --wds-cobalt-400-rgb: 0, 123, 252;
+  --wds-cobalt-500: #0063cb;
+  --wds-cobalt-500-rgb: 0, 99, 203;
+  --wds-cobalt-600: #0451a3;
+  --wds-cobalt-600-rgb: 4, 81, 163;
+  --wds-cobalt-700: #073d76;
+  --wds-cobalt-700-rgb: 7, 61, 118;
+  --wds-cobalt-800: #092642;
+  --wds-cobalt-800-rgb: 9, 38, 66;
+  --wds-purple-50: #f7f5ff;
+  --wds-purple-50-rgb: 247, 245, 255;
+  --wds-purple-75: #efebff;
+  --wds-purple-75-rgb: 239, 235, 255;
+  --wds-purple-100: #e8e0ff;
+  --wds-purple-100-rgb: 232, 224, 255;
+  --wds-purple-200: #d1c4ff;
+  --wds-purple-200-rgb: 209, 196, 255;
+  --wds-purple-300: #a791ff;
+  --wds-purple-300-rgb: 167, 145, 255;
+  --wds-purple-400: #7f66ff;
+  --wds-purple-400-rgb: 127, 102, 255;
+  --wds-purple-500: #5e47de;
+  --wds-purple-500-rgb: 94, 71, 222;
+  --wds-purple-600: #4837af;
+  --wds-purple-600-rgb: 72, 55, 175;
+  --wds-purple-700: #3a327b;
+  --wds-purple-700-rgb: 58, 50, 123;
+  --wds-purple-800: #242447;
+  --wds-purple-800-rgb: 36, 36, 71;
+}
+section {
+  height: 100vh;
+  height: 100svh;
+  border: 1px solid red;
+}
+section > div {
+  padding: var(--gap-section);
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+h1 {
+  font-weight: 800;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: var(--black-1);
+  margin-bottom: 24px;
+}
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: fit-content;
+}
+.box div:first-child h4 {
+  color: var(--user-1);
+}
+.box div:last-child h4 {
+  color: var(--user-2);
+}
+.box div h4 {
+  font-size: 96px;
+  font-weight: 700;
+}
+
+.box div p {
+  font-size: 22px;
+  font-weight: 300;
+}
+.message {
+  background-color: white;
+  width: fit-content;
+  padding: 12px 28px;
+  border-radius: 14px;
+  position: relative;
+}
+.message::after {
+  content: "▶";
+  position: absolute;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  top: -12px;
+  left: -18px;
+  transform: rotate(90deg);
+}
+.message:last-child {
+  background-color: #d9fdd3;
+  align-self: flex-end;
+}
+.message:last-child::after {
+  color: #d9fdd3;
+  top: -12px;
+  right: -18px;
+  left: auto;
+}
