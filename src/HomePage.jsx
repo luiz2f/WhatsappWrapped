@@ -15,8 +15,6 @@ function HomePage() {
     setConversa(textArea);
   };
 
-  console.log(error);
-
   return (
     <>
       <section className="home">

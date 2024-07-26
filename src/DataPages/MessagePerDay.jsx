@@ -1,14 +1,7 @@
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+// import StackedBarplot from "../graphs/StackedBarplot";
+import StackedBarPlot from "../graphs/StackedBarPlot";
 import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
-function MessagePerDay() {
+function MessagePerDay({ graph }) {
   const { data } = useMessagePerPeriod();
   const { day } = data || {};
 
@@ -16,29 +9,9 @@ function MessagePerDay() {
     <section>
       <div>
         <h1>Mensagens por dia da semana</h1>
-        {day ? (
-          <BarChart width={900} height={400} data={day}>
-            <CartesianGrid />
-            <XAxis dataKey="x" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-
-            {Object.entries(day[0])
-              .filter(([key]) => key !== "x") // Filter out the key 'x'
-              .map(([key]) => (
-                <Bar
-                  key={`key-${key}`}
-                  dataKey={key}
-                  stackId="a"
-                  fill={key === "Luy" ? "#8884d8" : "#3a8055"}
-                />
-              ))}
-          </BarChart>
-        ) : (
-          ""
-        )}
-        <div></div>
+        <div className="graph">
+          {day ? <StackedBarPlot graph={graph} data={day} /> : ""}
+        </div>
       </div>
     </section>
   );

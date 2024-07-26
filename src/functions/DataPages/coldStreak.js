@@ -56,7 +56,6 @@ export function coldStreak(messages) {
     } else if (differenceInDays <= 1.1) {
       if (currentStreak > longestStreak) {
         longestStreak = currentStreak;
-        console.log(sortedDates[i - dateDiff], currentStreak, i, dateDiff);
         startDate = sortedDates[i - dateDiff];
         endDate = currentDate;
       }

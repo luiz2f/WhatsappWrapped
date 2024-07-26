@@ -57,9 +57,10 @@ body.stop-transitions * {
   --green-1: #25d366;
   --green-0: #008069;
   --gap-section: 48px;
-  --user-1: rgb(0, 110, 255);
-  --user-2: rgb(255, 0, 179);
-
+  --user1: rgb(62, 141, 86);
+  --user2: rgb(92, 78, 172);
+  --graphW: 800;
+  --graphH: 400;
   --wds-pink-50: #fff5f8;
   --wds-pink-50-rgb: 255, 245, 248;
   --wds-pink-75: #ffebf1;
@@ -333,12 +334,7 @@ h1 {
   gap: 24px;
   width: auto;
 }
-.box div:first-child h4 {
-  color: var(--user-1);
-}
-.box div:last-child h4 {
-  color: var(--user-2);
-}
+
 .box div h4 {
   font-size: 96px;
   font-weight: 700;
@@ -388,12 +384,6 @@ h1 {
 .messageQuantity p {
   color: var(--black-1);
   text-align: center;
-}
-.messageQuantity > div:first-child h4 {
-  color: var(--user-1);
-}
-.messageQuantity > div:last-child h4 {
-  color: var(--user-2);
 }
 .flexcolumn {
   display: flex;
@@ -508,4 +498,19 @@ h1 {
   font-size: 14px;
   font-weight: 400;
   color: #000000;
+}
+
+.user1 {
+  color: var(--user1);
+}
+.user2 {
+  color: var(--user2);
+}
+.user3 {
+  color: green;
+}
+
+.graph {
+  display: flex;
+  justify-content: center;
 }

@@ -10,7 +10,9 @@ function MessagePerHour() {
     <section>
       <div>
         <h1>Mensagens por hora</h1>
-        {hour && <CircularBarPlot data={hour} width={500} height={500} />}{" "}
+        <div className="graph">
+          {hour && <CircularBarPlot data={hour} width={500} height={500} />}{" "}
+        </div>
       </div>
     </section>
   );

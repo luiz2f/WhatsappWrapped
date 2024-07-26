@@ -1,16 +1,7 @@
-// import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod.js";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
+import StackedBarPlot from "../graphs/StackedBarPlot";
 
-function MessagePerYear() {
+function MessagePerYear({ graph }) {
   const { data } = useMessagePerPeriod();
   const { year } = data || {};
 
@@ -18,29 +9,8 @@ function MessagePerYear() {
     <section>
       <div>
         <h1>Mensagens por ano</h1>
-        <div>
-          {year ? (
-            <BarChart width={900} height={400} data={year}>
-              <CartesianGrid />
-              <XAxis dataKey="x" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-
-              {Object.entries(year[0])
-                .filter(([key]) => key !== "x") // Filter out the key 'x'
-                .map(([key]) => (
-                  <Bar
-                    key={`key-${key}`}
-                    dataKey={key}
-                    stackId="a"
-                    fill={key === "Luy" ? "#8884d8" : "#3a8055"}
-                  />
-                ))}
-            </BarChart>
-          ) : (
-            ""
-          )}
+        <div className="graph">
+          {year ? <StackedBarPlot graph={graph} data={year} /> : ""}
         </div>
       </div>
     </section>

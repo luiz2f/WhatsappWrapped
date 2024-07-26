@@ -3,6 +3,9 @@ import { percent } from "../functions/percent";
 
 function StickerQuantity() {
   const { data } = useQuery({ queryKey: ["NonMessage"] });
+  const { data: usersColors } = useQuery({
+    queryKey: ["userColor"],
+  });
   const totalAudio = data
     ? Object.values(data).reduce((sum, types) => {
         return sum + (types["figurinha"] || 0);
@@ -17,7 +20,7 @@ function StickerQuantity() {
           {data &&
             Object.entries(data).map(([key, value]) => (
               <div className="message" key={key}>
-                <h4>
+                <h4 className={key}>
                   {value.figurinha}{" "}
                   <span>({percent(value.figurinha / totalAudio)})</span> {key}
                 </h4>

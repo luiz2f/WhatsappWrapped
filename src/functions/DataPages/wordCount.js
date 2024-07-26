@@ -16,7 +16,6 @@ export function wordCount(messages) {
       wordCountPerUser[message.usuario] += wordCount;
     }
   }
-
   // Retorna o objeto com a contagem de palavras
   return wordCountPerUser;
 }

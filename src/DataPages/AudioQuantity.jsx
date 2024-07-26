@@ -1,8 +1,12 @@
+import { useQuery } from "@tanstack/react-query";
 import { percent } from "../functions/percent";
 import useNonMessage from "../hooks/dataPages/useNonMessage";
 
 function AudioQuantity() {
   const { data } = useNonMessage();
+  const { data: usersColors } = useQuery({
+    queryKey: ["userColor"],
+  });
 
   const totalAudio = data
     ? Object.values(data).reduce((sum, types) => {
@@ -18,7 +22,7 @@ function AudioQuantity() {
           {data &&
             Object.entries(data).map(([key, value]) => (
               <div className="message" key={key}>
-                <h4>
+                <h4 className={key}>
                   {value.audio}{" "}
                   <span>({percent(value.audio / totalAudio)})</span> {key}
                 </h4>

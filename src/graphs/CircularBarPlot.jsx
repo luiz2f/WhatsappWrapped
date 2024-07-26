@@ -1,12 +1,23 @@
 import React, { useMemo, useState, useEffect } from "react";
 import * as d3 from "d3";
 import WatchDashes from "./WatchDashes";
+import { useQuery } from "@tanstack/react-query";
 
 const MARGIN = 50;
 const BAR_PADDING = 0;
 const COLORS = ["#69c781", "#6689c6"];
 
 export default function CircularBarplot({ width, height, data }) {
+  const { data: usersColors } = useQuery({
+    queryKey: ["userColor"],
+  });
+
+  function getColor(key) {
+    if (usersColors) {
+      const color = `var(--${usersColors[key]})`;
+      return color;
+    }
+  }
   const innerRadius = (Math.min(width, height) / 2) * 0.2;
   const outerRadius = Math.min(width, height) / 2 - MARGIN;
 
@@ -57,6 +68,7 @@ export default function CircularBarplot({ width, height, data }) {
 
   const handleMouseOver = (event, groupName) => {
     const [x, y] = d3.pointer(event);
+
     setHoveredGroup(groupName);
     setHoverPosition({ x, y });
   };
@@ -84,10 +96,8 @@ export default function CircularBarplot({ width, height, data }) {
         <g key={i + "-" + j}>
           <path
             d={path}
-            opacity={0.7}
             stroke="var(--background)"
-            fill={colorScale(subgroup.key)}
-            fillOpacity={0.9}
+            fill={`var(--${subgroup.key})`}
             strokeWidth={4}
             onMouseMove={(e) => handleMouseOver(e, group.data)}
             onMouseOut={handleMouseOut}
@@ -173,6 +183,7 @@ export default function CircularBarplot({ width, height, data }) {
       </svg>
       {hoveredGroup && (
         <div
+          className="hoverbox"
           style={{
             position: "absolute",
             left: hoverPosition.x + 250, // Ajuste esses valores para posicionar corretamente
@@ -188,7 +199,7 @@ export default function CircularBarplot({ width, height, data }) {
             <strong>{hoveredGroup}:00</strong>
           </div>
           {hoveredGroupData.map((item, index) => (
-            <div key={index} style={{ color: colorScale(item.subgroup) }}>
+            <div key={index} className={item.subgroup}>
               <>{item.subgroup}</> {item.value}
             </div>
           ))}

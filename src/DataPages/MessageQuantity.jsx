@@ -1,19 +1,21 @@
+import { useEffect } from "react";
 import { formatNumber } from "../functions/formatNumber";
 import { percent } from "../functions/percent";
 import useMessageCount from "../hooks/dataPages/useMessageCount";
 import useMostUsedMessages from "../hooks/dataPages/useMostUsedMessages";
 import useMostUsedWords from "../hooks/dataPages/useMostUsedWords";
 import useWordCount from "../hooks/dataPages/useWordCount";
+import useUserColors from "../hooks/dataPages/useUserColors";
+import { useQuery } from "@tanstack/react-query";
 
 function MessageQuantity() {
-  const { data: message } = useMessageCount(); // Usa o hook customizado
-  const { data: words } = useWordCount(); // Usa o hook customizado
+  const { data: message } = useMessageCount();
+  const { data: words } = useWordCount();
   const { data: mostUsedWords } = useMostUsedWords();
   const { totalWordCount, userWordCount } = mostUsedWords || {};
   const { data } = useMostUsedMessages();
   const { userMessageCount, totalMessageCount } = data || {};
 
-  console.log();
   const totalMessages = message
     ? Object.values(message).reduce((sum, value) => sum + value, 0)
     : 0;
@@ -28,6 +30,7 @@ function MessageQuantity() {
     }
     return chunks;
   };
+
   return (
     <section>
       <div>
@@ -39,9 +42,9 @@ function MessageQuantity() {
         <div className="messageQuantity">
           {message &&
             Object.entries(message).map(([key, value]) => (
-              <div className="flexcolumn" key={Math.random()}>
+              <div className="flexcolumn" key={key}>
                 <div className="message">
-                  <h4>{key}</h4>
+                  <h4 className={key}>{key}</h4>
                   <p>
                     <strong>{formatNumber(value)}</strong> mensagens
                     {/* <span> {percent(value / totalMessages)}</span> */}

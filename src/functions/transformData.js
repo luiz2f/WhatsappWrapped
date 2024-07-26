@@ -2,7 +2,7 @@
 
 export function transformData(data) {
   if (!data) {
-    console.log(data, "data transform data is false");
+    console.error(data, "data transform data is false");
     return;
   }
   const regexDataHora =
@@ -26,9 +26,11 @@ export function transformData(data) {
 
   const conversaLimpa = conversaSemQuebras.replace(/\u200E/g, "");
 
-  const conversa2 = conversaLimpa.replace(/\n(?![\[])/g, " ");
+  const conversaSemQuebra = conversaLimpa.replace(/\n(?![\[])/g, " ");
 
-  const linhas = conversa2.split("\n");
+  const conversaSemCifrao = conversaSemQuebra.replace(/[$`]/g, "");
+
+  const linhas = conversaSemCifrao.split("\n");
 
   const arrayData = [];
 

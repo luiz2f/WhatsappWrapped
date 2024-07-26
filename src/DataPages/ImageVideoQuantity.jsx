@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { percent } from "../functions/percent";
+import { useEffect } from "react";
 
 function ImageQuantity() {
   const { data } = useQuery({ queryKey: ["NonMessage"] });
@@ -17,7 +18,7 @@ function ImageQuantity() {
           {data &&
             Object.entries(data).map(([key, value]) => (
               <div className="message" key={key}>
-                <h4>
+                <h4 className={key}>
                   {value.imagem}{" "}
                   <span>({percent(value.imagem / totalAudio)})</span> {key}
                 </h4>
