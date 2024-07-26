@@ -1,4 +1,4 @@
-import useMostUsedWords from "../hooks/DataPages/useMostUsedWords";
+import useMostUsedWords from "../hooks/dataPages/useMostUsedWords";
 import { formatNumber } from "../functions/formatNumber";
 
 function MostSendWords() {
@@ -12,7 +12,7 @@ function MostSendWords() {
     <section>
       <div>
         <h1>
-          A mensagem mais enviada por vocês é{" "}
+          A palavra mais enviada por vocês é{" "}
           <span>&quot;{topTotalWord ? topTotalWord.word : "..."}&quot;</span>{" "}
           <br />
           {topTotalWord

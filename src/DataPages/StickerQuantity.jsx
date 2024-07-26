@@ -11,7 +11,7 @@ function StickerQuantity() {
   return (
     <section>
       <div>
-        <h1>Vocês trocaram {totalAudio} figurinhas</h1>
+        <h1>{totalAudio} figurinhas</h1>
 
         <div className="box">
           {data &&

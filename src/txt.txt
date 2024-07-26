@@ -1,0 +1,21 @@
+- design tudo 
+  - pagina inicial
+  - mensagem mais enviada
+    - pódio 🏆
+  - figurinha / audio / imagem
+    - enfeite lateral 🎍
+  - por ano ✅
+    - grafico de barra stacked ✅
+  - dia de semana ✅
+    - semanal bar stacked ✅
+  - por hora ✅
+    - grafico barplot circular stacked ✅
+  - sequencia 🟡
+    - cold 🧊
+    - hot 🔥
+
+geral
+- emoji ios
+- definição cor global --user1 --user2
+- mensagem pequena
+- fundo whatsapp

@@ -11,7 +11,7 @@ function ImageQuantity() {
   return (
     <section>
       <div>
-        <h1>Vocês trocaram {totalAudio} imagens</h1>
+        <h1>{totalAudio} imagens</h1>
 
         <div className="box">
           {data &&

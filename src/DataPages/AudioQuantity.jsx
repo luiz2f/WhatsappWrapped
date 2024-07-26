@@ -1,5 +1,5 @@
 import { percent } from "../functions/percent";
-import useNonMessage from "../hooks/DataPages/useNonMessage";
+import useNonMessage from "../hooks/dataPages/useNonMessage";
 
 function AudioQuantity() {
   const { data } = useNonMessage();
@@ -12,7 +12,7 @@ function AudioQuantity() {
   return (
     <section>
       <div>
-        <h1>Vocês trocaram {totalAudio} audios</h1>
+        <h1>{totalAudio} audios</h1>
 
         <div className="box">
           {data &&

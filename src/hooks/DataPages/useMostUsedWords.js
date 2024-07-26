@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { mostUsedWords } from "../../functions/DataPages/mostUsedWords";
+import { mostUsedWords } from "../../functions/dataPages/mostUsedWords";
 
 export default function useMostUsedWords() {
   const { data: mensagens } = useQuery({

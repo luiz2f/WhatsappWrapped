@@ -85,10 +85,27 @@ export function messagesPerPeriod(messages) {
     hour: hourKey,
     users: result.hour[hourKey] || {},
   }));
+  const transformYearData = (data) => {
+    return Object.entries(data).map(([year, users]) => {
+      return {
+        x: year,
+        ...users,
+      };
+    });
+  };
+  const newhour = sortedHours
+    .map(({ hour, users }) =>
+      Object.entries(users).map(([subgroup, value]) => ({
+        group: hour,
+        subgroup,
+        value,
+      }))
+    )
+    .flat();
 
   return {
-    ...result,
-    day: sortedDays,
-    hour: sortedHours, // Agora é uma array
+    year: transformYearData(result.year),
+    day: transformYearData(sortedDays),
+    hour: newhour, // Agora é uma array
   };
 }

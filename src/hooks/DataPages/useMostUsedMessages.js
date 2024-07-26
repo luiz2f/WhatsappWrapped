@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { mostUsedMessages } from "../../functions/DataPages/mostUsedMessages";
+import { mostUsedMessages } from "../../functions/dataPages/mostUsedMessages";
 
 export default function useMostUsedMessages() {
   const { data: mensagens } = useQuery({

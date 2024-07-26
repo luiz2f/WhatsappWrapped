@@ -1,33 +1,46 @@
-import useMessagePerPeriod from "../hooks/DataPages/useMessagePerPeriod";
+// import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod.js";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
 
 function MessagePerYear() {
   const { data } = useMessagePerPeriod();
   const { year } = data || {};
-  const calculateTotalMessages = (yearData) => {
-    return Object.values(yearData).reduce((total, count) => total + count, 0);
-  };
+
   return (
     <section>
       <div>
         <h1>Mensagens por ano</h1>
-
         <div>
-          {year &&
-            Object.entries(data.year).map(([year, users]) => {
-              const totalMessages = calculateTotalMessages(users);
-              return (
-                <div key={year} style={{ marginBottom: "20px" }}>
-                  <p>
-                    {year} {totalMessages} mensagens
-                  </p>
-                  {Object.entries(users).map(([user, count]) => (
-                    <p key={user}>
-                      {user}: {count}
-                    </p>
-                  ))}
-                </div>
-              );
-            })}
+          {year ? (
+            <BarChart width={900} height={400} data={year}>
+              <CartesianGrid />
+              <XAxis dataKey="x" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+
+              {Object.entries(year[0])
+                .filter(([key]) => key !== "x") // Filter out the key 'x'
+                .map(([key]) => (
+                  <Bar
+                    key={`key-${key}`}
+                    dataKey={key}
+                    stackId="a"
+                    fill={key === "Luy" ? "#8884d8" : "#3a8055"}
+                  />
+                ))}
+            </BarChart>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </section>

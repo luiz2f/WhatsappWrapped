@@ -1,5 +1,5 @@
-import { QueryCache, useQuery } from "@tanstack/react-query";
-import { messageCount } from "../../functions/DataPages/messageCount";
+import { useQuery } from "@tanstack/react-query";
+import { messageCount } from "../../functions/dataPages/messageCount";
 
 export default function useMessageCount() {
   const { data: mensagens } = useQuery({

@@ -1,21 +1,21 @@
-import AudioQuantity from "./DataPages/AudioQuantity";
-import ColdStreak from "./DataPages/ColdStreak";
-import ImageQuantity from "./DataPages/ImageVideoQuantity";
-import MessagePerDay from "./DataPages/MessagePerDay";
-import MessagePerHour from "./DataPages/MessagePerHour";
-import MessagePerYear from "./DataPages/MessagePerYear";
-import MessageQuantity from "./DataPages/MessageQuantity";
-import MessageStreak from "./DataPages/MessageStreak";
-import MostSendMessages from "./DataPages/MostSendMessages";
-import MostSendWords from "./DataPages/MostSendWords";
-import StickerQuantity from "./DataPages/StickerQuantity";
+import AudioQuantity from "./dataPages/AudioQuantity";
+import ColdStreak from "./dataPages/ColdStreak";
+import ImageQuantity from "./dataPages/ImageVideoQuantity";
+import MessagePerDay from "./dataPages/MessagePerDay";
+import MessagePerHour from "./dataPages/MessagePerHour";
+import MessagePerYear from "./dataPages/MessagePerYear";
+import MessageQuantity from "./dataPages/MessageQuantity";
+import MessageStreak from "./dataPages/MessageStreak";
+import MostSendMessages from "./dataPages/MostSendMessages";
+import MostSendWords from "./dataPages/MostSendWords";
+import StickerQuantity from "./dataPages/StickerQuantity";
 
 function DataPages() {
   return (
     <>
       <MessageQuantity />
-      <MostSendWords />
-      <MostSendMessages />
+      {/* <MostSendWords /> */}
+      {/* <MostSendMessages /> */}
       <AudioQuantity />
       <StickerQuantity />
       <ImageQuantity />

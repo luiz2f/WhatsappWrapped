@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { NonMessage } from "../../functions/DataPages/NonMessage";
+import { NonMessage } from "../../functions/dataPages/NonMessage";
 
 export default function useNonMessage() {
   const { data: mensagens } = useQuery({

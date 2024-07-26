@@ -37,25 +37,46 @@ export function messageStreak(messages) {
     .map((dateStr) => new Date(dateStr))
     .sort((a, b) => a - b);
 
-  let longestStreak = 0;
-  let startDate = null;
-  let endDate = null;
+  if (sortedDates.length === 0) {
+    return {
+      longestStreak: 0,
+      startDate: null,
+      endDate: null,
+    };
+  }
 
+  let longestStreak = 1;
+  let currentStreak = 1;
+  let startDate = sortedDates[0];
+  let endDate = sortedDates[0];
   for (let i = 1; i < sortedDates.length; i++) {
     const prevDate = sortedDates[i - 1];
     const currentDate = sortedDates[i];
     const differenceInDays = (currentDate - prevDate) / 86400000; // 86400000 ms = 1 dia
-
-    if (differenceInDays > longestStreak) {
-      longestStreak = differenceInDays - 1; // Desconta o último dia com mensagem
-      startDate = new Date(prevDate.getTime() + 86400000); // Primeiro dia sem mensagem
-      endDate = new Date(currentDate.getTime() - 86400000); // Último dia sem mensagem
+    if (differenceInDays === 1) {
+      currentStreak++;
+      if (currentStreak > longestStreak) {
+        endDate = currentDate;
+      }
+    } else if (differenceInDays > 1) {
+      if (currentStreak > longestStreak) {
+        longestStreak = currentStreak;
+        startDate = sortedDates[i - currentStreak];
+        endDate = currentDate;
+      }
+      currentStreak = 1;
     }
+  }
+
+  // Verifica a última sequência
+  if (currentStreak > longestStreak) {
+    longestStreak = currentStreak;
+    endDate = sortedDates[sortedDates.length - 1];
   }
 
   return {
     longestStreak,
-    startDate: startDate ? formatDate(startDate) : null,
-    endDate: endDate ? formatDate(endDate) : null,
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDate),
   };
 }

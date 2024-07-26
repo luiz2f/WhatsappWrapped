@@ -1,4 +1,4 @@
-import useMessageStreak from "../hooks/DataPages/useMessageStreak";
+import useMessageStreak from "../hooks/dataPages/useMessageStreak";
 
 function MessageStreak() {
   const { data } = useMessageStreak();
@@ -8,13 +8,18 @@ function MessageStreak() {
     <section>
       <div>
         <h1>Maior sequência de mensagens</h1>
-        <div>
-          <div></div>
+        <div className="streak">
           <div>
-            <p>{longestStreak} dias</p>
-            <p>é a maior sequência de mensagens</p>
+            <img src="https://em-content.zobj.net/source/apple/391/fire_1f525.png" />
+          </div>
+          <div>
             <p>
-              ocorreu entren {startDate} e {endDate}
+              {longestStreak}
+              <span>dias</span>
+            </p>
+            <p>é a maior sequência de mensagens entre vocês</p>
+            <p>
+              ocorreu entre {startDate} e {endDate}
             </p>
           </div>
         </div>

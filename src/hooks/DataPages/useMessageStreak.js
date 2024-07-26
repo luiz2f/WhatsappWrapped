@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { messageStreak } from "../../functions/DataPages/messageStreak";
-import { coldStreak } from "../../functions/DataPages/coldStreak";
+import { messageStreak } from "../../functions/dataPages/messageStreak";
 
 export default function useColdStreak() {
   const { data: mensagens } = useQuery({
@@ -8,8 +7,8 @@ export default function useColdStreak() {
   });
 
   const { isLoading, data, error } = useQuery({
-    queryKey: ["coldStreak"],
-    queryFn: () => coldStreak(mensagens),
+    queryKey: ["messageStreak"],
+    queryFn: () => messageStreak(mensagens),
   });
 
   return { isLoading, data, error };

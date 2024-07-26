@@ -10,6 +10,7 @@ body {
   background-color: var(--background);
   width: 100%;
 
+  background-blend-mode: difference;
   margin: 0;
   padding: 0;
   font-weight: 400;
@@ -18,6 +19,19 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: absolute;
+  opacity: 0.4;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(https://static.whatsapp.net/rsrc.php/v3/yl/r/gi_DckOUM5a.png);
+  background-size: auto;
+  z-index: -1;
 }
 #data {
   -webkit-appearance: none;
@@ -248,9 +262,8 @@ body.stop-transitions * {
   --wds-purple-800-rgb: 36, 36, 71;
 }
 section {
-  height: 100vh;
-  height: 100svh;
-  border: 1px solid red;
+  min-height: 50vh;
+  min-height: 50svh;
 }
 section > div {
   padding: var(--gap-section);
@@ -260,17 +273,65 @@ section > div {
   height: 100%;
 }
 h1 {
-  font-weight: 800;
-  font-size: 48px;
+  width: fit-content;
+  /* padding: 10px 24px; */
+  font-weight: 700;
+  font-size: 24px;
   text-transform: uppercase;
-  color: var(--black-1);
+  color: #000000;
+  border-radius: 7.5px;
+  margin-bottom: 48px;
+  /* background-color: rgba(255, 255, 255, 0.75); */
+  /* align-self: center; */
+}
+.home {
+  height: 100vh;
+  height: 100svh;
+}
+.home div {
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: 100%;
+}
+.home textarea {
+  border: var(--grey-1) solid 2px;
+  background-color: white;
+  padding: 6px;
+  border-radius: 14px 0 0 14px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--green-1);
+  scrollbar-color: var(--wds-green-400) var(--grey-1);
+  width: 800px;
+  height: 350px;
+  margin-top: 8px;
+}
+.home button {
+  border: none;
+  padding: 14px 28px;
+  font-size: 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-top: 14px;
+  margin-bottom: 12px;
+  background-color: var(--wds-green-500);
+  color: white;
+  cursor: pointer;
+  transition: all 200ms;
+  text-transform: uppercase;
+}
+.home button:hover {
+  background-color: var(--wds-green-400);
+}
+.home h1 {
   margin-bottom: 24px;
 }
+
 .box {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: fit-content;
+  width: auto;
 }
 .box div:first-child h4 {
   color: var(--user-1);
@@ -303,13 +364,148 @@ h1 {
   left: -18px;
   transform: rotate(90deg);
 }
-.message:last-child {
+.message:last-child,
+.messageQuantity > .flexcolumn:last-child > .message {
   background-color: #d9fdd3;
   align-self: flex-end;
 }
-.message:last-child::after {
+.message:last-child::after,
+.messageQuantity > .flexcolumn:last-child > .message::after {
   color: #d9fdd3;
   top: -12px;
-  right: -18px;
+  right: -15px;
   left: auto;
+}
+.messageQuantity {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.messageQuantity h4 {
+  font-size: 96px;
+  font-weight: 700;
+}
+.messageQuantity p {
+  color: var(--black-1);
+  text-align: center;
+}
+.messageQuantity > div:first-child h4 {
+  color: var(--user-1);
+}
+.messageQuantity > div:last-child h4 {
+  color: var(--user-2);
+}
+.flexcolumn {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.smallmessage p {
+  text-align: left;
+}
+.strong {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.smallmessage {
+  background-color: white;
+  width: fit-content;
+  padding: 10px 13px;
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: all 200ms;
+}
+.smallmessage::after {
+  content: "▶";
+  position: absolute;
+  color: rgb(255, 255, 255);
+  font-size: 28px;
+  top: -8px;
+  left: -12px;
+  transform: rotate(90deg);
+  text-align: left;
+}
+.messageQuantity > .flexcolumn:last-child .smallmessage {
+  background-color: #d9fdd3;
+  align-self: flex-end;
+}
+.messageQuantity > .flexcolumn:first-child > .strong {
+  align-self: flex-start;
+}
+.messageQuantity > .flexcolumn:last-child > .strong {
+  align-self: flex-end;
+}
+.messageQuantity > .flexcolumn:last-child .smallmessage::after {
+  color: #d9fdd3;
+
+  right: -10px;
+  left: auto;
+}
+
+.flutu {
+  font-size: 12px;
+  text-align: end;
+  transform: translateY(4px);
+  color: var(--grey-3);
+}
+
+.smallmessage:hover {
+  transform: translateY(-8px);
+  box-shadow: 4px 4px 50px 4px #0000002d;
+}
+
+.flexwords,
+.words {
+  display: flex;
+  gap: 6px;
+}
+.words {
+  flex-direction: column;
+}
+
+.flexcolumn:first-child
+  .words
+  .smallmessage:not(:first-child):not(:nth-child(1))::after,
+.flexcolumn:last-child
+  .words
+  .smallmessage:not(:last-child):not(:nth-child(4))::after {
+  content: none;
+}
+
+.streak {
+  display: flex;
+  align-self: center;
+}
+.streak > div:first-child img {
+  width: 200px;
+}
+
+.streak > div:last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.streak > div:last-child > p:first-child {
+  font-size: 126px;
+  font-weight: 800;
+  color: #ff3607;
+  line-height: 85px;
+}
+.streak.cold > div:last-child > p:first-child {
+  color: #6eb7e5;
+}
+.streak > div:last-child > p:first-child span {
+  font-size: 92px;
+  font-weight: 200;
+}
+.streak > div:last-child > p:nth-child(2) {
+  font-size: 16px;
+  font-weight: 800;
+  color: #000000;
+}
+.streak > div:last-child > p:nth-child(3) {
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
 }

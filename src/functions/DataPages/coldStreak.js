@@ -37,43 +37,43 @@ export function coldStreak(messages) {
     .map((dateStr) => new Date(dateStr))
     .sort((a, b) => a - b);
 
-  let longestStreak = 0;
-  let currentStreak = 0;
-  let startDate = null;
-  let endDate = null;
-  let currentStartDate = null;
+  let longestStreak = 1;
+  let currentStreak = 1;
+  let startDate = sortedDates[0];
+  let endDate = sortedDates[0];
+  let dateDiff = 1;
 
-  for (let i = 0; i < sortedDates.length; i++) {
-    const date = sortedDates[i];
-    const isFirstDay = i === 0 || date - sortedDates[i - 1] === 86400000; // Verifica se é o dia seguinte
-
-    if (isFirstDay) {
-      if (currentStreak === 0) {
-        currentStartDate = date;
+  for (let i = 1; i < sortedDates.length; i++) {
+    const prevDate = sortedDates[i - 1];
+    const currentDate = sortedDates[i];
+    const differenceInDays = (currentDate - prevDate) / 86400000; // 86400000 ms = 1 dia
+    if (differenceInDays != 1) {
+      currentStreak += differenceInDays;
+      dateDiff++;
+      if (currentStreak > longestStreak) {
+        endDate = currentDate;
       }
-      currentStreak++;
-      endDate = date;
-    } else {
+    } else if (differenceInDays <= 1.1) {
       if (currentStreak > longestStreak) {
         longestStreak = currentStreak;
-        startDate = currentStartDate;
-        endDate = sortedDates[i - 1];
+        console.log(sortedDates[i - dateDiff], currentStreak, i, dateDiff);
+        startDate = sortedDates[i - dateDiff];
+        endDate = currentDate;
       }
       currentStreak = 1;
-      currentStartDate = date;
+      dateDiff = 1;
     }
   }
 
-  // Verifica se a última sequência é a mais longa
+  // Verifica a última sequência
   if (currentStreak > longestStreak) {
     longestStreak = currentStreak;
-    startDate = currentStartDate;
     endDate = sortedDates[sortedDates.length - 1];
   }
-  console.log(datesSet);
+
   return {
     longestStreak,
-    startDate: startDate ? formatDate(startDate) : null,
-    endDate: endDate ? formatDate(endDate) : null,
+    startDate: formatDate(startDate),
+    endDate: formatDate(endDate),
   };
 }

@@ -1,4 +1,4 @@
-import useMostUsedMessages from "../hooks/DataPages/useMostUsedMessages";
+import useMostUsedMessages from "../hooks/dataPages/useMostUsedMessages";
 import { formatNumber } from "../functions/formatNumber";
 
 function MostSendMessages() {

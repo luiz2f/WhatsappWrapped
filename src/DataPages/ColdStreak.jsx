@@ -1,4 +1,4 @@
-import useColdStreak from "../hooks/DataPages/useColdStreak";
+import useColdStreak from "../hooks/dataPages/useColdStreak";
 
 function ColdStreak() {
   const { data } = useColdStreak();
@@ -8,13 +8,18 @@ function ColdStreak() {
     <section>
       <div>
         <h1>Maior sequência sem mensagens</h1>
-        <div>
-          <div></div>
+        <div className="streak cold">
           <div>
-            <p>{longestStreak} dias</p>
-            <p>é a maior sequência de dias sem mensagens</p>
+            <img src="https://em-content.zobj.net/source/apple/391/ice_1f9ca.png" />
+          </div>
+          <div>
             <p>
-              ocorreu entren {startDate} e {endDate}
+              {longestStreak}
+              <span>dias</span>
+            </p>
+            <p>é a maior sequência de dias sem mensagens entre vocês</p>
+            <p>
+              ocorreu entre {startDate} e {endDate}
             </p>
           </div>
         </div>

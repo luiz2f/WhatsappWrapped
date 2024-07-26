@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { messagesPerPeriod } from "../../functions/DataPages/messagesPerPeriod";
+import { messagesPerPeriod } from "../../functions/dataPages/messagesPerPeriod";
 
 export default function useMessagePerPeriod() {
   const { data: mensagens } = useQuery({
