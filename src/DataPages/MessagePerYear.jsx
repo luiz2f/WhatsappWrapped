@@ -1,10 +1,10 @@
 import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
-import StackedBarPlot from "../graphs/StackedBarPlot";
+import StackedBarPlot from "../ui/graphs/StackedBarplot";
 
 function MessagePerYear({ graph }) {
   const { data } = useMessagePerPeriod();
   const { year } = data || {};
-  console.log(year);
+  console.log(graph);
   return (
     <section>
       <div>

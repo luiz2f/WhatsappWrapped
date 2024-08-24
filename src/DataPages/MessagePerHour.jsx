@@ -1,6 +1,5 @@
-// import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
-import CircularBarPlot from "../graphs/CircularBarPlot";
 import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
+import CircularBarplot from "../ui/graphs/CircularBarPlot";
 
 function MessagePerHour({ graph }) {
   const { data } = useMessagePerPeriod();
@@ -11,7 +10,7 @@ function MessagePerHour({ graph }) {
       <div>
         <h1 className="nomargin">Mensagens por hora</h1>
         <div className="graph">
-          {hour && <CircularBarPlot data={hour} width={graph} height={graph} />}{" "}
+          {hour && <CircularBarplot data={hour} width={graph} height={graph} />}{" "}
         </div>
       </div>
     </section>

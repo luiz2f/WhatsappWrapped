@@ -25,7 +25,7 @@ function WidthGraphs() {
     <>
       <MessagePerYear graph={graph} />
       <MessagePerDay graph={graph} />
-      <MessagePerHour graph={graph.w} />
+      <MessagePerHour graph={graph.w > 700 ? 500 : graph.w} />
     </>
   );
 }
