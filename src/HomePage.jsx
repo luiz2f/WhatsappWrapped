@@ -55,7 +55,7 @@ function HomePage() {
         ) : (
           <div>
             <form>
-              <h1>Wentsapple</h1>
+              <h1>Whatsapp Wrapped</h1>
               <p>Insira arquivo .txt de seu histórico de conversa:</p>
               <FileInput
                 selectedFile={selectedFile}

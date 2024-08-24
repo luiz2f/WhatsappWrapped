@@ -398,7 +398,7 @@ section > div > div.box > div.message:nth-child(2) > h4 {
 .fileinput {
   position: relative;
   margin-top: 12px;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 .file-btn {
