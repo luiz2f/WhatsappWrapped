@@ -9,21 +9,7 @@ function HomePage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [conversa, setConversa] = useState("");
   const [formError, setFormError] = useState("");
-  useEffect(() => {
-    // Função para carregar o arquivo chat.txt
-    const loadChatFile = async () => {
-      try {
-        const response = await fetch("src/chat.txt");
-        const text = await response.text();
-        setConversa(text);
-      } catch (error) {
-        console.error("Erro ao carregar o arquivo:", error);
-        setFormError("Não foi possível carregar o arquivo de conversa.");
-      }
-    };
-
-    loadChatFile();
-  }, []);
+  console.log(textArea);
   const { isLoading, data, error } = useTransformData(conversa); // Usa o hook customizado
   useEffect(() => {
     if (!isLoading && data) {
