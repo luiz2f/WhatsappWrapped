@@ -32,7 +32,7 @@ export function transformData(data) {
 
   const linhas = conversaSemCifrao.split("\n");
 
-  const arrayData = [];
+  const mensagens = [];
 
   const usuarios = new Set();
   const usuarioMap = new Map();
@@ -95,7 +95,7 @@ export function transformData(data) {
         }
       }
 
-      arrayData.push({
+      mensagens.push({
         usuario: usuarioAtual,
         mensagemAtual,
         ano,
@@ -108,10 +108,10 @@ export function transformData(data) {
         tipo,
       });
     } else
-      arrayData.push({
+      mensagens.push({
         usuario: "bug",
       });
   }
 
-  return arrayData;
+  return mensagens;
 }

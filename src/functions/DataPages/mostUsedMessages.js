@@ -45,10 +45,10 @@ export function mostUsedMessages(messages) {
   }
 
   // Função para ordenar o objeto de contagem de mensagens em ordem decrescente e retornar as 10 mais enviadas
-  const getTopMessages = (messageCount) => {
+  const getTopMessages = (messageCount, tamanho = 3) => {
     return Object.entries(messageCount)
       .sort(([, countA], [, countB]) => countB - countA)
-      .slice(0, 3)
+      .slice(0, tamanho)
       .reduce((sortedArr, [normalizedMessage, count]) => {
         sortedArr.push({ message: messageMap.get(normalizedMessage), count });
         return sortedArr;

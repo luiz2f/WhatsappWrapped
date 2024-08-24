@@ -34,17 +34,16 @@ export const hourOrder = [
   "23",
 ];
 
-export function messagesPerPeriod(messages) {
+export function messagesPerPeriod(messages, usuarios) {
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {};
   }
 
-  // Estrutura para armazenar contagens
   const result = {
     year: {},
     day: {},
-    hour: [], // Modificado para ser uma array
+    hour: [],
   };
 
   for (const message of messages) {
@@ -54,7 +53,6 @@ export function messagesPerPeriod(messages) {
     const hour = message.hora?.trim();
 
     if (user && year && dayOfWeek && hour) {
-      // Inicializa o ano, dia da semana e hora se necessário
       if (!result.year[year]) {
         result.year[year] = {};
       }
@@ -65,14 +63,11 @@ export function messagesPerPeriod(messages) {
         result.hour[hour] = {};
       }
 
-      // Contadores por usuário
       result.year[year][user] = (result.year[year][user] || 0) + 1;
       result.day[dayOfWeek][user] = (result.day[dayOfWeek][user] || 0) + 1;
       result.hour[hour][user] = (result.hour[hour][user] || 0) + 1;
     }
   }
-
-  // Ordena os dias da semana
   const sortedDays = dayOrder.reduce((acc, day) => {
     if (result.day[day]) {
       acc[day] = result.day[day];
@@ -80,22 +75,51 @@ export function messagesPerPeriod(messages) {
     return acc;
   }, {});
 
-  // Ordena as horas do dia e cria a array no formato desejado
   const sortedHours = hourOrder.map((hourKey) => ({
     hour: hourKey,
     users: result.hour[hourKey] || {},
   }));
-  const transformYearData = (data) => {
-    return Object.entries(data).map(([year, users]) => {
+
+  function transformYearData(data) {
+    return Object.entries(data)
+      .filter(([year, users]) => {
+        const totalMessages = Object.values(users).reduce(
+          (sum, count) => sum + count,
+          0
+        );
+        return totalMessages >= 10; // Filtra anos com menos de 10 mensagens
+      })
+      .map(([year, users]) => {
+        return {
+          x: year,
+          ...sortUsers(users),
+        };
+      });
+  }
+
+  function transformWeekDayData(data) {
+    return Object.entries(data).map(([day, users]) => {
       return {
-        x: year,
-        ...users,
+        x: day,
+        ...sortUsers(users),
       };
     });
-  };
-  const newhour = sortedHours
+  }
+  //Organiza usuários para gráficos de barras
+  function sortUsers(users) {
+    const sortedUsers = usuarios.reduce((acc, user) => {
+      if (users[user] !== undefined) {
+        acc[user] = users[user];
+      }
+      return acc;
+    }, {});
+
+    return sortedUsers;
+  }
+
+  const newHour = sortedHours
     .map(({ hour, users }) =>
-      Object.entries(users).map(([subgroup, value]) => ({
+      Object.entries(sortUsers(users)).map(([subgroup, value]) => ({
         group: hour,
         subgroup,
         value,
@@ -105,7 +129,7 @@ export function messagesPerPeriod(messages) {
 
   return {
     year: transformYearData(result.year),
-    day: transformYearData(sortedDays),
-    hour: newhour, // Agora é uma array
+    day: transformWeekDayData(sortedDays),
+    hour: newHour, // Agora é uma array
   };
 }

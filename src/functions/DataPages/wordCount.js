@@ -1,4 +1,6 @@
 export function wordCount(messages) {
+  //CONTA AS PALAVRAS TOTAIS PARA A MENSAGEM DO MEIO, NÃO CONTA AS PALAVRAS POR USUARIO
+
   // Cria um objeto para armazenar a contagem de palavras por usuário
   const wordCountPerUser = {};
 

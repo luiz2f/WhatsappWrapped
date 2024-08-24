@@ -2,42 +2,52 @@ import React, { useMemo, useState, useEffect } from "react";
 import * as d3 from "d3";
 import WatchDashes from "./WatchDashes";
 import { useQuery } from "@tanstack/react-query";
+import { userToClassName } from "../functions/userToClassName";
 
-const MARGIN = 50;
+const MARGIN = 0;
 const BAR_PADDING = 0;
-const COLORS = ["#69c781", "#6689c6"];
 
 export default function CircularBarplot({ width, height, data }) {
   const { data: usersColors } = useQuery({
     queryKey: ["userColor"],
   });
-
   function getColor(key) {
     if (usersColors) {
-      const color = `var(--${usersColors[key]})`;
+      const color = `var(--${userToClassName(usersColors[key])})`;
       return color;
     }
   }
+  const COLORS = ["red", "blue"];
+
+  // tamanho do circulo exterior e interior
   const innerRadius = (Math.min(width, height) / 2) * 0.2;
   const outerRadius = Math.min(width, height) / 2 - MARGIN;
 
-  const groups = [...new Set(data.map((d) => d.group))];
-  const subGroups = [...new Set(data.map((d) => d.subgroup))];
+  // separa os horarios
+  const groups = [...new Set(data?.map((d) => d.group))];
+  // separa as categorias stack
+  const subGroups = [...new Set(data?.map((d) => d.subgroup))];
 
-  // Create an ordered list of subgroups based on initial data
+  // ordena de acordo com o que aparece primeiro
   const orderedSubGroups = useMemo(() => {
-    return [...new Set(data.map((d) => d.subgroup))];
+    return [...new Set(data?.map((d) => d.subgroup))];
   }, [data]);
 
   // Stack the data
   const stackGenerator = d3
     .stack()
-    .keys(subGroups)
-    .value((d) => data.filter((item) => item.group === d)[0].value);
+    .keys(orderedSubGroups)
+    .value((d, key) => {
+      const item = data.find(
+        (item) => item.group === d && item.subgroup === key
+      );
+      return item ? item.value : 0;
+    });
+
   const series = stackGenerator(groups);
 
   // Find size of the longest bar and group rank.
-  const lastStackGroup = series[series.length - 1] || [];
+  const lastStackGroup = series[series?.length - 1] || [];
   const groupTotalValues = lastStackGroup.map((group) => {
     const biggest = group[group.length - 1] || 0;
     return { name: group.data, value: biggest };
@@ -52,14 +62,12 @@ export default function CircularBarplot({ width, height, data }) {
     .padding(BAR_PADDING);
 
   const yScale = useMemo(() => {
+    // troquei o scaleRadial pra ser mais pela altura do que pela área de gráfico
     return d3
-      .scaleRadial()
+      .scaleLinear()
       .domain([0, maxValue])
       .range([innerRadius, outerRadius]);
-  }, [data, width, height]);
-
-  // Color Scale
-  const colorScale = d3.scaleOrdinal().domain(subGroups).range(COLORS);
+  }, [maxValue, innerRadius, outerRadius]);
 
   // Build the ~rectangles
   const arcPathGenerator = d3.arc();
@@ -76,18 +84,15 @@ export default function CircularBarplot({ width, height, data }) {
   const handleMouseOut = () => {
     setHoveredGroup(null);
   };
-
-  const allShapes = series.map((subgroup, i) => {
+  const allShapes = series?.map((subgroup, i) => {
     return subgroup.map((group, j) => {
       const startAngle = xScale(group.data) || 0;
-
       const path = arcPathGenerator({
         innerRadius: yScale(group[0]),
         outerRadius: yScale(group[1]),
         startAngle,
         endAngle: startAngle + xScale.bandwidth(),
       });
-
       if (!path) {
         return;
       }
@@ -97,9 +102,9 @@ export default function CircularBarplot({ width, height, data }) {
           <path
             d={path}
             stroke="var(--background)"
-            fill={`var(--${subgroup.key})`}
-            strokeWidth={4}
-            onMouseMove={(e) => handleMouseOver(e, group.data)}
+            fill={`var(--${userToClassName(subgroup?.key)}`}
+            strokeWidth={1}
+            onMouseMove={(e) => handleMouseOver(e, group?.data)}
             onMouseOut={handleMouseOut}
           />
         </g>
@@ -118,40 +123,6 @@ export default function CircularBarplot({ width, height, data }) {
       return item ? { ...item, value: item.value } : { subgroup, value: 0 };
     });
   }, [hoveredGroup, data, orderedSubGroups]);
-
-  const allLabels = groupTotalValues.map((group, i) => {
-    const startAngle = xScale(group.name) || 0;
-
-    const turnLabelUpsideDown =
-      (startAngle + xScale.bandwidth() / 2 + Math.PI) % (2 * Math.PI) < Math.PI;
-
-    const labelRotation =
-      ((startAngle + xScale.bandwidth() / 2) * 180) / Math.PI - 90;
-
-    const labelXTranslation = yScale(group.value) + 10;
-
-    const labelTransform =
-      "rotate(" +
-      labelRotation +
-      ")" +
-      ",translate(" +
-      labelXTranslation +
-      ",0)";
-
-    return (
-      <g transform={labelTransform} key={i}>
-        <text
-          textAnchor={turnLabelUpsideDown ? "end" : "start"}
-          alignmentBaseline="middle"
-          fontSize={16}
-          transform={turnLabelUpsideDown ? "rotate(180)" : "rotate(0)"}
-        >
-          {group.name}
-        </text>
-      </g>
-    );
-  });
-
   return (
     <div style={{ position: "relative" }}>
       <svg width={width} height={height}>
@@ -198,9 +169,9 @@ export default function CircularBarplot({ width, height, data }) {
           <div>
             <strong>{hoveredGroup}:00</strong>
           </div>
-          {hoveredGroupData.map((item, index) => (
-            <div key={index} className={item.subgroup}>
-              <>{item.subgroup}</> {item.value}
+          {hoveredGroupData.reverse().map((item, index) => (
+            <div key={index} className={`${userToClassName(item.subgroup)}`}>
+              <strong>{item.subgroup}</strong> {item.value}
             </div>
           ))}
         </div>

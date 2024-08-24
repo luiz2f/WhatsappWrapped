@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MessagePerDay from "./MessagePerDay";
 import MessagePerYear from "./MessagePerYear";
+import MessagePerHour from "./MessagePerHour";
 
 function WidthGraphs() {
   const [graph, setGraph] = useState({ w: 300, h: 300 });
@@ -24,6 +25,7 @@ function WidthGraphs() {
     <>
       <MessagePerYear graph={graph} />
       <MessagePerDay graph={graph} />
+      <MessagePerHour graph={graph.w} />
     </>
   );
 }

@@ -1,10 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Legend,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { userToClassName } from "../functions/userToClassName";
 
 function StackedBarPlot({ graph, data }) {
   const hoverBox = useRef(null);
-  const [hoverBoxSize, setHoverBoxSize] = useState(null);
   const [hoveredBar, setHoveredBar] = useState(null);
   const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
 
@@ -46,24 +54,34 @@ function StackedBarPlot({ graph, data }) {
 
   return (
     <div>
-      <BarChart width={graph.w} height={graph.h} data={data}>
+      <BarChart
+        isAnimationActive={false}
+        width={graph.w}
+        height={graph.h}
+        data={data}
+        // barGap={"10%"}
+        barCategoryGap={"5%"}
+      >
         <CartesianGrid />
         <XAxis dataKey="x" />
         <YAxis />
         <Legend />
 
-        {Object.entries(data[0])
-          .filter(([key]) => key !== "x") // Filter out the key 'x'
-          .map(([key]) => (
-            <Bar
-              key={`key-${key}`}
-              dataKey={key}
-              stackId="a"
-              fill={`var(--${key})`}
-              onMouseMove={(event) => handleMouseOver(event)}
-              onMouseOut={handleMouseOut}
-            />
-          ))}
+        {data[0] &&
+          Object?.entries(data[0])
+            ?.filter(([key]) => key !== "x") // Filter out the key 'x'
+            ?.map(([key]) => (
+              <Bar
+                isAnimationActive={false}
+                key={`key-${key}`}
+                dataKey={key}
+                stackId="a"
+                fill={`var(--${userToClassName(key)})`}
+                onMouseMove={(event) => handleMouseOver(event)}
+                onMouseOut={handleMouseOut}
+                barCategoryGap={1}
+              />
+            ))}
       </BarChart>
       {hoveredBar && (
         <div
@@ -78,6 +96,7 @@ function StackedBarPlot({ graph, data }) {
             pointerEvents: "none",
             textAlign: "center",
             fontWeight: 500,
+            width: "max-content",
           }}
         >
           <div>
@@ -87,8 +106,8 @@ function StackedBarPlot({ graph, data }) {
             .filter(([key]) => key !== "x")
             .reverse()
             .map(([key, value]) => (
-              <div key={key} className={key}>
-                {key} {value}
+              <div key={key} className={userToClassName(key)}>
+                <strong>{key}</strong> {value}
               </div>
             ))}
         </div>

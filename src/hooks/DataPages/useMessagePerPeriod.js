@@ -6,9 +6,12 @@ export default function useMessagePerPeriod() {
     queryKey: ["messages"],
   });
 
+  const { data: usuarios } = useQuery({
+    queryKey: ["usuarios"],
+  });
   const { isLoading, data, error } = useQuery({
     queryKey: ["messagePerPeriod"],
-    queryFn: () => messagesPerPeriod(mensagens),
+    queryFn: () => messagesPerPeriod(mensagens, usuarios),
   });
 
   return { isLoading, data, error };

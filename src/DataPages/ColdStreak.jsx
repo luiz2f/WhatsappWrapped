@@ -1,9 +1,9 @@
 import useColdStreak from "../hooks/dataPages/useColdStreak";
+import useEmojis from "../hooks/dataPages/useEmojis";
 
 function ColdStreak() {
   const { data } = useColdStreak();
   const { endDate, longestStreak, startDate } = data || {};
-
   return (
     <section>
       <div>
@@ -17,7 +17,7 @@ function ColdStreak() {
               {longestStreak}
               <span>dias</span>
             </p>
-            <p>é a maior sequência de dias sem mensagens entre vocês</p>
+            <p>é a maior sequência sem mensagens entre vocês</p>
             <p>
               ocorreu entre {startDate} e {endDate}
             </p>
