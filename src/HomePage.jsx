@@ -9,7 +9,6 @@ function HomePage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [conversa, setConversa] = useState("");
   const [formError, setFormError] = useState("");
-  console.log(textArea);
   const { isLoading, data, error } = useTransformData(conversa); // Usa o hook customizado
   useEffect(() => {
     if (!isLoading && data) {

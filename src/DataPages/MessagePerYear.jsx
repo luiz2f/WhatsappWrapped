@@ -4,7 +4,6 @@ import StackedBarPlot from "../ui/graphs/StackedBarplot";
 function MessagePerYear({ graph }) {
   const { data } = useMessagePerPeriod();
   const { year } = data || {};
-  console.log(graph);
   return (
     <section>
       <div>
