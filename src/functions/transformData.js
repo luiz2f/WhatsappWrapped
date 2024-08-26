@@ -1,117 +1,93 @@
 /* eslint-disable */
+const regexUsuario = /] (.+?):/;
+const regexMensagem = /: (.+)/;
+const regexConteudoColchetes = /\[(.+?)\]/;
+const regexTipos = {
+  imagem: /imagem ocultada/,
+  figurinha: /figurinha omitida/,
+  audio: /áudio ocultado/,
+  video: /vídeo omitido/,
+  gif: /GIF omitido/,
+  documento: /documento omitido$/,
+  ligacao: /^Ligação de voz/,
+  contato: /Cartão do contato omitido/,
+};
+const regexRemoveAndReplace = /[\u200E$`]|(?<=\])\n(?![\[])/g;
 
-export function transformData(data) {
-  if (!data) {
-    console.error(data, "data transform data is false");
-    return;
-  }
-  const regexDataHora =
-    /\[(\d{2}\/\d{2}\/\d{4}), (\d{2}:\d{2}:\d{2})\]|\[(\d{2}\/\d{2}\/\d{4}) (\d{2}:\d{2}:\d{2})\]/;
-  const regexUsuario = /] (.+?):/;
-  const regexMensagem = /: (.+)/;
-  const regexTipos = {
-    imagem: /imagem ocultada/,
-    figurinha: /figurinha omitida/,
-    audio: /áudio ocultado/,
-    video: /vídeo omitido/,
-    gif: /GIF omitido/,
-    documento: /documento omitido$/,
-    ligacao: /^Ligação de voz/,
-    contato: /Cartão do contato omitido/,
-  };
+function extractUsuario(linha) {
+  return linha.match(regexUsuario);
+}
 
-  // Conversa de exemplo
-  // const conversaSemQuebras = fs.readFileSync(caminhoArquivo).toString("utf-8");
-  const conversaSemQuebras = data;
-
-  const conversaLimpa = conversaSemQuebras.replace(/\u200E/g, "");
-
-  const conversaSemQuebra = conversaLimpa.replace(/\n(?![\[])/g, " ");
-
-  const conversaSemCifrao = conversaSemQuebra.replace(/[$`]/g, "");
-
-  const linhas = conversaSemCifrao.split("\n");
-
-  const mensagens = [];
-
-  const usuarios = new Set();
-  const usuarioMap = new Map();
-
-  let usuarioAtual = "";
-  let dataAtual = "";
-  let mensagemAtual = "";
-  let horaAtual = "";
-
-  for (const linha of linhas.slice(0, 100)) {
-    const dataHoraMatch = linha.match(regexDataHora);
-    const usuarioMatch = linha.match(regexUsuario);
-
-    if (usuarioMatch && dataHoraMatch) {
-      if (usuarios.size < 2) {
-        usuarios.add(usuarioMatch[1]);
-      }
-      if (usuarios.size >= 2 && usuarios.has(usuarioMatch[1])) {
-        usuarioMap.set(usuarioMatch[1], true);
-      }
+function determinarTipoMensagem(mensagem) {
+  for (const [key, regex] of Object.entries(regexTipos)) {
+    if (mensagem.match(regex)) {
+      return key;
     }
   }
+  return "mensagem";
+}
 
-  for (const linha of linhas) {
-    if (linha[0] === "[" || linha[1] === "[") {
-      const dataHoraMatch = linha.match(regexDataHora);
-      const usuarioMatch = linha.match(regexUsuario);
-      const mensagemMatch = linha.match(regexMensagem);
-      if (!dataHoraMatch) {
-        continue;
-      }
-      if (!usuarioMatch) {
-        continue;
-      }
-      if (
-        !mensagemMatch ||
-        mensagemMatch[1] ===
-          "Aguardando mensagem. Essa ação pode levar alguns instantes."
-      ) {
-        continue;
-      }
-      mensagemAtual = mensagemMatch[1];
-      usuarioAtual = usuarioMatch[1];
-      dataAtual = dataHoraMatch[3] || dataHoraMatch[1];
-      horaAtual = dataHoraMatch[4] || dataHoraMatch[2];
-      const [dia, mes, ano] = dataAtual?.split("/");
-      const [hora, minuto, segundo] = horaAtual.split(":");
-      const diaDaSemana = new Date(`${mes}/${dia}/${ano}`).toLocaleDateString(
-        "pt-BR",
-        { weekday: "long" }
-      );
+export function transformData(data) {
+  const startTime = performance.now();
 
-      let tipo = "mensagem";
-      // Verificando o tipo da mensagem
-      for (const key in regexTipos) {
-        if (mensagemAtual.match(regexTipos[key])) {
-          tipo = key;
-          mensagemAtual = "";
-          break;
-        }
-      }
+  if (!data) {
+    console.error(data, "data transform data is false");
+    return [];
+  }
+
+  // Remove caracter maluco que tinha no txt e mensagens com quebra de linha
+  const conversaLimpa = data.replace(regexRemoveAndReplace, (match) =>
+    match === "\n" ? " " : ""
+  );
+
+  // Divide o texto em linhas
+  const linhas = [...new Set(conversaLimpa.split("\n"))];
+
+  const mensagens = [];
+  const usuarios = new Map();
+
+  // Analisa as primeiras 100 linhas para identificar os usuários principais
+  linhas.slice(0, 100).forEach((linha) => {
+    const usuarioMatch = extractUsuario(linha);
+    if (usuarioMatch) {
+      const usuario = usuarioMatch[1];
+      usuarios.set(usuario, (usuarios.get(usuario) || 0) + 1);
+    }
+  });
+
+  // Identifica os dois usuários mais frequentes
+  const usuariosPrincipais = [...usuarios.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 2)
+    .map(([usuario]) => usuario);
+
+  // Itera sobre todas as linhas, processando apenas as mensagens dos usuários principais
+  linhas.forEach((linha) => {
+    const conteudoColchetes = linha.match(regexConteudoColchetes);
+    const usuarioMatch = linha.match(regexUsuario);
+    const mensagemMatch = linha.match(regexMensagem);
+    if (
+      conteudoColchetes &&
+      usuarioMatch &&
+      mensagemMatch &&
+      usuariosPrincipais.includes(usuarioMatch[1]) &&
+      mensagemMatch[1] !==
+        "Aguardando mensagem. Essa ação pode levar alguns instantes."
+    ) {
+      const tipo = determinarTipoMensagem(mensagemMatch[1]);
 
       mensagens.push({
-        usuario: usuarioAtual,
-        mensagemAtual,
-        ano,
-        mes,
-        dia,
-        diaDaSemana,
-        hora,
-        // minuto,
-        // segundo,
+        usuario: usuarioMatch[1],
+        mensagemAtual: mensagemMatch[1],
+        dataHora: conteudoColchetes[1],
         tipo,
       });
-    } else
-      mensagens.push({
-        usuario: "bug",
-      });
-  }
+    }
+  });
+
+  const endTime = performance.now();
+  const elapsedTime = endTime - startTime;
+  console.log(`transformData: ${elapsedTime} milliseconds, ${endTime}`);
 
   return mensagens;
 }

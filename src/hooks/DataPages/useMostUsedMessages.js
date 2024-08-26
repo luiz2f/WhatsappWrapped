@@ -5,7 +5,6 @@ export default function useMostUsedMessages() {
   const { data: mensagens } = useQuery({
     queryKey: ["messages"],
   });
-
   const { isLoading, data, error } = useQuery({
     queryKey: ["mostUsedMessages"],
     queryFn: () => mostUsedMessages(mensagens),

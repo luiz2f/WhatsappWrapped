@@ -1,4 +1,6 @@
 export function mostUsedMessages(messages) {
+  const startTime = performance.now();
+
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {
@@ -15,9 +17,11 @@ export function mostUsedMessages(messages) {
   const messageMap = new Map();
 
   // Contadores de progresso
-  let analyzedMessages = 0;
-
-  for (const message of messages) {
+  const mensagensFiltradas = messages.filter(
+    ({ tipo, mensagemAtual }) =>
+      tipo === "mensagem" && mensagemAtual?.trim().split(/\s+/).length > 2
+  );
+  for (const message of mensagensFiltradas) {
     const user = message.usuario;
     const originalText = message.mensagemAtual?.trim();
     const text = originalText?.toLowerCase(); // Converte para minúsculas
@@ -29,19 +33,13 @@ export function mostUsedMessages(messages) {
         messageMap.set(text, originalText);
       }
 
-      const words = text.split(/\s+/); // Divide a mensagem em palavras
-      if (words.length > 2) {
-        // Verifica se a mensagem tem mais de duas palavras
-        if (!userMessageCount[user]) {
-          userMessageCount[user] = {};
-        }
-        userMessageCount[user][text] = (userMessageCount[user][text] || 0) + 1;
-        totalMessageCount[text] = (totalMessageCount[text] || 0) + 1;
+      // Verifica se a mensagem tem mais de duas palavras
+      if (!userMessageCount[user]) {
+        userMessageCount[user] = {};
       }
+      userMessageCount[user][text] = (userMessageCount[user][text] || 0) + 1;
+      totalMessageCount[text] = (totalMessageCount[text] || 0) + 1;
     }
-
-    // Atualiza o contador de progresso
-    analyzedMessages++;
   }
 
   // Função para ordenar o objeto de contagem de mensagens em ordem decrescente e retornar as 10 mais enviadas
@@ -54,7 +52,9 @@ export function mostUsedMessages(messages) {
         return sortedArr;
       }, []);
   };
-
+  const endTime = performance.now();
+  const elapsedTime = endTime - startTime;
+  console.log(`mostUsedMessages: ${elapsedTime} milliseconds, ${endTime}`);
   return {
     userMessageCount: Object.fromEntries(
       Object.entries(userMessageCount).map(([user, messageCount]) => [

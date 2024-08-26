@@ -5,7 +5,6 @@ export default function useMostUsedWords() {
   const { data: mensagens } = useQuery({
     queryKey: ["messages"],
   });
-
   const { isLoading, data, error } = useQuery({
     queryKey: ["mostUsedWords"],
     queryFn: () => mostUsedWords(mensagens),

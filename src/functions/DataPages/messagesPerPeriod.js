@@ -35,6 +35,8 @@ export const hourOrder = [
 ];
 
 export function messagesPerPeriod(messages, usuarios) {
+  const startTime = performance.now();
+
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {};
@@ -48,26 +50,37 @@ export function messagesPerPeriod(messages, usuarios) {
 
   for (const message of messages) {
     const user = message.usuario?.trim();
-    const year = message.ano?.trim();
-    const dayOfWeek = message.diaDaSemana?.trim();
-    const hour = message.hora?.trim();
+    const dataHora = message.dataHora?.trim();
+    const type = message.tipo?.trim();
 
-    if (user && year && dayOfWeek && hour) {
-      if (!result.year[year]) {
-        result.year[year] = {};
-      }
-      if (!result.day[dayOfWeek]) {
-        result.day[dayOfWeek] = {};
-      }
-      if (!result.hour[hour]) {
-        result.hour[hour] = {};
-      }
+    if (user && dataHora && type) {
+      // Extrair data e hora
+      const [date, time] = dataHora.split(", ");
+      const [day, month, year] = date.split("/").map(Number);
+      const [hour] = time.split(":");
 
-      result.year[year][user] = (result.year[year][user] || 0) + 1;
-      result.day[dayOfWeek][user] = (result.day[dayOfWeek][user] || 0) + 1;
-      result.hour[hour][user] = (result.hour[hour][user] || 0) + 1;
+      // Mapeia o dia da semana
+      const dateObj = new Date(year, month - 1, day);
+      const dayOfWeek = dayOrder[dateObj.getDay()];
+
+      if (dayOfWeek && hour) {
+        if (!result.year[year]) {
+          result.year[year] = {};
+        }
+        if (!result.day[dayOfWeek]) {
+          result.day[dayOfWeek] = {};
+        }
+        if (!result.hour[hour]) {
+          result.hour[hour] = {};
+        }
+
+        result.year[year][user] = (result.year[year][user] || 0) + 1;
+        result.day[dayOfWeek][user] = (result.day[dayOfWeek][user] || 0) + 1;
+        result.hour[hour][user] = (result.hour[hour][user] || 0) + 1;
+      }
     }
   }
+
   const sortedDays = dayOrder.reduce((acc, day) => {
     if (result.day[day]) {
       acc[day] = result.day[day];
@@ -105,7 +118,7 @@ export function messagesPerPeriod(messages, usuarios) {
       };
     });
   }
-  //Organiza usuários para gráficos de barras
+
   function sortUsers(users) {
     const sortedUsers = usuarios.reduce((acc, user) => {
       if (users[user] !== undefined) {
@@ -126,6 +139,10 @@ export function messagesPerPeriod(messages, usuarios) {
       }))
     )
     .flat();
+
+  const endTime = performance.now();
+  const elapsedTime = endTime - startTime;
+  console.log(`messagesPerPeriod: ${elapsedTime} milliseconds, ${endTime}`);
 
   return {
     year: transformYearData(result.year),

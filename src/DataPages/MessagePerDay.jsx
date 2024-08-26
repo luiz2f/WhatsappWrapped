@@ -1,16 +1,13 @@
 // import StackedBarplot from "../graphs/StackedBarplot";
 import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
 import StackedBarPlot from "../ui/graphs/StackedBarplot";
-function MessagePerDay({ graph }) {
-  const { data } = useMessagePerPeriod();
-  const { day } = data || {};
-
+function MessagePerDay({ graph, data }) {
   return (
     <section>
       <div>
         <h1>Mensagens por dia da semana</h1>
         <div className="graph">
-          {day ? <StackedBarPlot graph={graph} data={day} /> : ""}
+          {data ? <StackedBarPlot graph={graph} data={data} /> : ""}
         </div>
       </div>
     </section>

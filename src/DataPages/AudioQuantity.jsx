@@ -2,9 +2,7 @@ import { percent } from "../functions/percent";
 import useNonMessage from "../hooks/dataPages/useNonMessage";
 import { formatNumber } from "../functions/formatNumber";
 
-function AudioQuantity() {
-  const { data } = useNonMessage();
-
+function AudioQuantity({ data }) {
   const totalAudio = data
     ? Object.values(data).reduce((sum, types) => {
         return sum + (types["audio"] || 0);

@@ -1,11 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { percent } from "../functions/percent";
-import { useEffect } from "react";
 import { formatNumber } from "../functions/formatNumber";
-import { userToClassName } from "../functions/userToClassName";
 
-function ImageQuantity() {
-  const { data } = useQuery({ queryKey: ["NonMessage"] });
+function ImageQuantity({ data }) {
   const totalImage = data
     ? Object.values(data).reduce((sum, types) => {
         return sum + (types["imagem"] || 0);

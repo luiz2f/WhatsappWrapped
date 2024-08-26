@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { BsFiletypeTxt } from "react-icons/bs";
-import Spinner from "./Spinner";
 
 function FileInput({ selectedFile, setSelectedFile }) {
   const [error, setError] = useState("");
@@ -20,6 +19,24 @@ function FileInput({ selectedFile, setSelectedFile }) {
     }
   };
 
+  const handleDrop = (event) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files[0];
+    if (file) {
+      if (file.name.endsWith(".txt")) {
+        setSelectedFile(file);
+        setError(""); // Clear any previous error
+      } else {
+        setError(`Apenas arquivos ".txt"`);
+        setSelectedFile(null); // Clear the selected file
+      }
+    }
+  };
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
   const onChooseFile = (e) => {
     e.preventDefault();
     inputRef.current.click();
@@ -33,7 +50,7 @@ function FileInput({ selectedFile, setSelectedFile }) {
   };
 
   return (
-    <div className="fileinput">
+    <div className="fileinput" onDrop={handleDrop} onDragOver={handleDragOver}>
       {/* Hidden file input element */}
       <input
         type="file"

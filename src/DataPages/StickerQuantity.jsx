@@ -2,9 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { percent } from "../functions/percent";
 import { formatNumber } from "../functions/formatNumber";
 
-function StickerQuantity() {
-  const { data } = useQuery({ queryKey: ["NonMessage"] });
-
+function StickerQuantity({ data }) {
   const totalAudio = data
     ? Object.values(data).reduce((sum, types) => {
         return sum + (types["figurinha"] || 0);

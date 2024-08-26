@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import useColdStreak from "../hooks/dataPages/useColdStreak";
-import useEmojis from "../hooks/dataPages/useEmojis";
+import Spinner from "../ui/Spinner";
 
 function ColdStreak() {
   const { data } = useColdStreak();
-  const { endDate, longestStreak, startDate } = data || {};
+  const { longestStreak, startDate, endDate } = data || 0;
+  // console.log("cold");
   return (
     <section>
       <div>

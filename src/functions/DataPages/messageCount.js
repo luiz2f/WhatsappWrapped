@@ -1,6 +1,8 @@
 export function messageCount(messages) {
+  const startTime = performance.now();
+
   // Cria um objeto para armazenar a contagem de mensagens por usuário
-  const contagemPorUsuario = {};
+  const contagemPorUsuario = [];
 
   // Itera sobre cada mensagem
   for (const message of messages) {
@@ -13,7 +15,9 @@ export function messageCount(messages) {
       contagemPorUsuario[message.usuario]++;
     }
   }
-
+  const endTime = performance.now();
+  const elapsedTime = endTime - startTime;
+  console.log(`messageCount: ${elapsedTime} milliseconds, ${endTime}`);
   // Retorna o objeto com a contagem de mensagens
   return contagemPorUsuario;
 }

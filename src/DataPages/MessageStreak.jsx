@@ -3,7 +3,6 @@ import useMessageStreak from "../hooks/dataPages/useMessageStreak";
 function MessageStreak() {
   const { data } = useMessageStreak();
   const { endDate, longestStreak, startDate } = data || {};
-
   return (
     <section>
       <div>
