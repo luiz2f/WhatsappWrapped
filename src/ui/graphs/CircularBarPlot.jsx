@@ -8,17 +8,6 @@ const MARGIN = 0;
 const BAR_PADDING = 0;
 
 export default function CircularBarplot({ width, height, data }) {
-  const { data: usersColors } = useQuery({
-    queryKey: ["userColor"],
-  });
-  function getColor(key) {
-    if (usersColors) {
-      const color = `var(--${userToClassName(usersColors[key])})`;
-      return color;
-    }
-  }
-  const COLORS = ["red", "blue"];
-
   // tamanho do circulo exterior e interior
   const innerRadius = (Math.min(width, height) / 2) * 0.2;
   const outerRadius = Math.min(width, height) / 2 - MARGIN;

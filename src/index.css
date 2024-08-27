@@ -69,10 +69,10 @@ body.stop-transitions * {
   --wds-green-600: #1b8748;
   --wds-green-600-rgb: 27, 135, 72;
 }
-section {
-  min-height: 50vh;
-  min-height: 50svh;
-}
+/* section {
+  /* min-height: 50vh; */
+/* min-height: 50svh; */
+
 section > div {
   padding: var(--gap-section);
 
@@ -512,9 +512,9 @@ footer p {
   h1 {
     margin-bottom: 24px;
   }
-  section {
+  /* section {
     min-height: fit-content;
-  }
+  } */
   .box div h4 {
     font-size: 48px;
     font-weight: 700;
@@ -529,7 +529,7 @@ footer p {
   }
   .home {
     margin-top: 12px;
-    min-height: fit-content;
+    /* min-height: fit-content; */
     height: fit-content;
   }
   form {

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DataPages from "./DataPages.jsx";
 import { useEffect, useState } from "react";
 import useTransformData from "./hooks/useTransformData.js";
+import { DataProvider } from "./context/dataContext.jsx";
 
 function App() {
   const queryClient = new QueryClient({
@@ -15,8 +16,10 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <HomePage />
+      <ReactQueryDevtools initialIsOpen={true} />
+      <DataProvider>
+        <HomePage />
+      </DataProvider>
     </QueryClientProvider>
   );
 }

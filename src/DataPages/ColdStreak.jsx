@@ -5,7 +5,6 @@ import Spinner from "../ui/Spinner";
 function ColdStreak() {
   const { data } = useColdStreak();
   const { longestStreak, startDate, endDate } = data || 0;
-  // console.log("cold");
   return (
     <section>
       <div>

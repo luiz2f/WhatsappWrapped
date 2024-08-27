@@ -2,8 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { messagesPerPeriod } from "../../functions/dataPages/messagesPerPeriod";
 
 export default function useMessagePerPeriod() {
-  console.log("period");
-
   const { data: mensagens } = useQuery({
     queryKey: ["messages"],
   });

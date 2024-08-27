@@ -6,6 +6,7 @@ export default function useMessageCount(mensagens) {
     queryKey: ["messageCount"],
     queryFn: () => messageCount(mensagens),
   });
+  console.log(data);
 
   return { isLoading, data, error };
 }

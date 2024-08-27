@@ -4,10 +4,13 @@ import FileInput from "./ui/FileInput";
 import Spinner from "./ui/Spinner";
 import DataPages from "./DataPages";
 import Form from "./Form";
+import useUserColors from "./hooks/dataPages/useUserColors";
+import { useData } from "./context/dataContext";
 
 function HomePage() {
-  const [conversa, setConversa] = useState("");
+  const { setConversa } = useData();
   const { isLoading, data, error } = useTransformData(conversa);
+
   useEffect(() => {
     if (!isLoading && data) {
       const element = document.querySelector("#msgqty");
@@ -16,6 +19,8 @@ function HomePage() {
       }
     }
   }, [isLoading, data]);
+  const { data: usersColors } = useUserColors();
+
   const isLoadingJs = !!conversa;
   return (
     <>

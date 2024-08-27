@@ -12,45 +12,13 @@ import Spinner from "./ui/Spinner";
 import NonMessage from "./dataPages/NonMessage";
 
 function DataPages() {
-  // const { data: usersColors } = useUserColors();
-  // useEffect(() => {
-  //   if (usersColors) {
-  //     const styleId = "user-styles";
-
-  //     let style = document.getElementById(styleId) || null;
-  //     if (!style) {
-  //       style = document.createElement("style");
-  //       style.id = styleId;
-  //       document.head.appendChild(style);
-  //     }
-
-  //     const cssRules = Object.entries(usersColors)
-  //       .map(([key, value]) => {
-  //         return `.${userToClassName(
-  //           key
-  //         )} { color: var(--${value}); fill: var(--${value}); }\n :root { --${userToClassName(
-  //           key
-  //         )}: var(--${value}) }`;
-  //       })
-  //       .join("\n");
-
-  //     style.textContent = cssRules;
-
-  //     return () => {
-  //       if (style) {
-  //         document.head.removeChild(style);
-  //       }
-  //     };
-  //   }
-  // }, [usersColors]);
-
   return (
     <>
       <MessageQuantity />
-      {/* <NonMessage />
+      <NonMessage />
       <WidthGraphs />
       <MessageStreak />
-      <ColdStreak /> */}
+      <ColdStreak />
 
       <footer>
         {" "}

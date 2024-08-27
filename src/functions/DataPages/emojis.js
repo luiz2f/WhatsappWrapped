@@ -1,5 +1,4 @@
-export function mostUsedEmojis(messages) {
-  console.log("emoji");
+export async function mostUsedEmojis(messages) {
   const startTime = performance.now();
 
   if (!messages || !Array.isArray(messages)) {

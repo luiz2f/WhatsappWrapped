@@ -19,38 +19,20 @@ function StackedBarPlot({ graph, data }) {
   function handleMouseOver(e) {
     const { payload } = e;
     setHoveredBar(payload);
-    // let hoverbox = document.querySelector(".hoverbox");
-
     if (hoveredBar) {
       window.addEventListener("mousemove", handleMouseMove);
     }
   }
-  // const tete = hoverBox.current
-  // ? hoverBox.current.getBoundingClientRect()
-  // : null;
-  // console.log(hoveredBar);
-  // const { width } = tete || {};
-  // const screenWidth = window.innerWidth;
+
   const handleMouseMove = (event) => {
     const [x, y] = d3.pointer(event);
-    // const screenHeight = window.innerHeight;
-
-    // if (hoverBox && width + event.x > screenWidth * 0.93) {
-    //   setHoverPosition({ x: x - 120, y });
-    // } else {
     setHoverPosition({ x, y });
-    // }
   };
 
   function handleMouseOut() {
     window.removeEventListener("mousemove", handleMouseMove);
     setHoveredBar(null);
   }
-  // console.log(hoverBox?.current?.getBoundingClientRect());
-  const screenHeight = window.innerHeight;
-  // console.log(screenWidth - hoverBox?.current?.getBoundingClientRect().right);
-
-  useEffect(() => {}, []);
 
   return (
     <div>
