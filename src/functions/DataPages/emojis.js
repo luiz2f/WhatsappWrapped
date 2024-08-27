@@ -1,4 +1,4 @@
-export async function mostUsedEmojis(messages) {
+export function mostUsedEmojis(messages) {
   const startTime = performance.now();
 
   if (!messages || !Array.isArray(messages)) {
@@ -55,20 +55,16 @@ export async function mostUsedEmojis(messages) {
       .map(([emoji, count]) => ({ emoji, count }));
   }
 
-  // Obtém os 10 emojis mais usados por usuário e no total
   const topUserEmojis = Object.fromEntries(
     Object.entries(userEmojiCount).map(([user, emojiCount]) => [
       user,
       getTopEmojisArray(emojiCount),
     ])
   );
-  const topTotalEmojis = getTopEmojisArray(totalEmojiCount);
+  // const topTotalEmojis = getTopEmojisArray(totalEmojiCount);
 
   const endTime = performance.now();
   const elapsedTime = endTime - startTime;
   console.log(`mostUsedEmojis: ${elapsedTime} milliseconds, ${endTime}`);
-  return {
-    userEmojiCount: topUserEmojis,
-    totalEmojiCount: topTotalEmojis,
-  };
+  return topUserEmojis;
 }

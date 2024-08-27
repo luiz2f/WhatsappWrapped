@@ -1,29 +1,31 @@
-import { Suspense, useEffect } from "react";
-import AudioQuantity from "./dataPages/AudioQuantity";
+import { useData } from "./context/dataContext";
+import { useEffect } from "react";
 import ColdStreak from "./dataPages/ColdStreak";
-import ImageQuantity from "./dataPages/ImageVideoQuantity";
 import MessageQuantity from "./dataPages/MessageQuantity";
 import MessageStreak from "./dataPages/MessageStreak";
-import StickerQuantity from "./dataPages/StickerQuantity";
-import useUserColors from "./hooks/dataPages/useUserColors";
 import WidthGraphs from "./dataPages/WidthGraphs";
-import { userToClassName } from "./functions/userToClassName";
-import Spinner from "./ui/Spinner";
 import NonMessage from "./dataPages/NonMessage";
 
 function DataPages() {
+  const { messageQuantity, nonMessage, graphData, messageStreak, coldStreak } =
+    useData();
+
   return (
     <>
-      <MessageQuantity />
-      <NonMessage />
-      <WidthGraphs />
-      <MessageStreak />
-      <ColdStreak />
+      {messageQuantity && <MessageQuantity messageQuantity={messageQuantity} />}
+      {nonMessage && <NonMessage nonMessage={nonMessage} />}
+      {graphData && <WidthGraphs graphData={graphData} />}
+      {messageStreak && <MessageStreak messageStreak={messageStreak} />}
+      {coldStreak && <ColdStreak coldStreak={coldStreak} />}
 
       <footer>
         {" "}
-        <p>Desenvolvido por</p>
-        <a href="https://github.com/luiz2f/">luiz2f</a>
+        {nonMessage && (
+          <>
+            <p>Desenvolvido por</p>
+            <a href="https://github.com/luiz2f/">luiz2f</a>
+          </>
+        )}
       </footer>
     </>
   );

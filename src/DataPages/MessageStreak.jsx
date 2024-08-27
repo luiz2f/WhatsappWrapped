@@ -1,8 +1,7 @@
-import useMessageStreak from "../hooks/dataPages/useMessageStreak";
+import { useData } from "../context/dataContext";
 
-function MessageStreak() {
-  const { data } = useMessageStreak();
-  const { endDate, longestStreak, startDate } = data || {};
+function MessageStreak({ messageStreak }) {
+  const { endDate, longestStreak, startDate } = messageStreak || {};
   return (
     <section>
       <div>

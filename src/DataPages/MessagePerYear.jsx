@@ -1,4 +1,3 @@
-import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
 import StackedBarPlot from "../ui/graphs/StackedBarplot";
 
 function MessagePerYear({ graph, data }) {

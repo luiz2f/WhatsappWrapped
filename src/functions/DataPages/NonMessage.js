@@ -1,4 +1,4 @@
-export async function nonMessage(messages) {
+export function nonMessage(messages) {
   const startTime = performance.now();
 
   if (!messages || !Array.isArray(messages)) {

@@ -3,6 +3,7 @@ import * as d3 from "d3";
 import WatchDashes from "./WatchDashes";
 import { useQuery } from "@tanstack/react-query";
 import { userToClassName } from "../../functions/userToClassName";
+import { formatNumber } from "../../functions/formatNumber";
 
 const MARGIN = 0;
 const BAR_PADDING = 0;

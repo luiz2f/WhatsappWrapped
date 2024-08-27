@@ -10,6 +10,7 @@ import {
   YAxis,
 } from "recharts";
 import { userToClassName } from "../../functions/userToClassName";
+import { formatNumber } from "../../functions/formatNumber";
 
 function StackedBarPlot({ graph, data }) {
   const hoverBox = useRef(null);

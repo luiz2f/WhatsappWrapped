@@ -1,10 +1,7 @@
-import { Suspense } from "react";
-import useColdStreak from "../hooks/dataPages/useColdStreak";
-import Spinner from "../ui/Spinner";
+import { useData } from "../context/dataContext";
 
-function ColdStreak() {
-  const { data } = useColdStreak();
-  const { longestStreak, startDate, endDate } = data || 0;
+function ColdStreak({ coldStreak }) {
+  const { longestStreak, startDate, endDate } = coldStreak || 0;
   return (
     <section>
       <div>

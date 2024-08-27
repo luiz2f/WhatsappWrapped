@@ -1,36 +1,19 @@
-import React, { useEffect, useState } from "react";
-import useTransformData from "./hooks/useTransformData";
-import FileInput from "./ui/FileInput";
-import Spinner from "./ui/Spinner";
-import DataPages from "./DataPages";
+import React, { useEffect } from "react";
+
 import Form from "./Form";
-import useUserColors from "./hooks/dataPages/useUserColors";
+import DataPages from "./DataPages";
 import { useData } from "./context/dataContext";
 
 function HomePage() {
-  const { setConversa } = useData();
-  const { isLoading, data, error } = useTransformData(conversa);
+  const { messageQuantity } = useData();
 
-  useEffect(() => {
-    if (!isLoading && data) {
-      const element = document.querySelector("#msgqty");
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [isLoading, data]);
-  const { data: usersColors } = useUserColors();
-
-  const isLoadingJs = !!conversa;
   return (
     <>
-      <Form
-        setConversa={setConversa}
-        isLoadingJs={isLoadingJs}
-        error={error}
-        data={data}
-      />
-      {data && <DataPages />}
+      {messageQuantity ? (
+        <DataPages />
+      ) : (
+        <Form messageQuantity={messageQuantity} />
+      )}
     </>
   );
 }

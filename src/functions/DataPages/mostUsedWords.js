@@ -6,7 +6,6 @@ export function mostUsedWords(messages) {
     console.error("Invalid messages array");
     return {
       userWordCount: {},
-      totalWordCount: {},
     };
   }
 
@@ -48,7 +47,6 @@ export function mostUsedWords(messages) {
         const userWords = userWordCount.get(user);
 
         userWords.set(word, (userWords.get(word) || 0) + factor);
-        // totalWordCount.set(cleanedWord, (totalWordCount.get(cleanedWord) || 0) + factor);
       }
     }
   }
@@ -59,19 +57,16 @@ export function mostUsedWords(messages) {
       .slice(0, number)
       .map(([word, count]) => ({ word, count }));
   };
-
+  const data = Object.fromEntries(
+    Array.from(userWordCount.entries()).map(([user, wordCountMap]) => [
+      user,
+      getTopWordsArray(wordCountMap, 6),
+    ])
+  );
   const endTime = performance.now();
   const elapsedTime = endTime - startTime;
   console.log(`mostUsedWords: ${elapsedTime} milliseconds, ${endTime}`);
   // console.profileEnd("25");
 
-  return {
-    userWordCount: Object.fromEntries(
-      Array.from(userWordCount.entries()).map(([user, wordCountMap]) => [
-        user,
-        getTopWordsArray(wordCountMap, 6),
-      ])
-    ),
-    totalWordCount: 0,
-  };
+  return data;
 }

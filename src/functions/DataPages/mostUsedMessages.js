@@ -5,13 +5,11 @@ export function mostUsedMessages(messages) {
     console.error("Invalid messages array");
     return {
       userMessageCount: {},
-      totalMessageCount: {},
     };
   }
 
   // Conta mensagens por usuário
   const userMessageCount = {};
-  const totalMessageCount = {};
 
   // Mapeia versões normalizadas para originais
   const messageMap = new Map();
@@ -38,7 +36,6 @@ export function mostUsedMessages(messages) {
         userMessageCount[user] = {};
       }
       userMessageCount[user][text] = (userMessageCount[user][text] || 0) + 1;
-      totalMessageCount[text] = (totalMessageCount[text] || 0) + 1;
     }
   }
 
@@ -52,16 +49,15 @@ export function mostUsedMessages(messages) {
         return sortedArr;
       }, []);
   };
+  const data = Object.fromEntries(
+    Object.entries(userMessageCount).map(([user, messageCount]) => [
+      user,
+      getTopMessages(messageCount),
+    ])
+  );
   const endTime = performance.now();
   const elapsedTime = endTime - startTime;
   console.log(`mostUsedMessages: ${elapsedTime} milliseconds, ${endTime}`);
-  return {
-    userMessageCount: Object.fromEntries(
-      Object.entries(userMessageCount).map(([user, messageCount]) => [
-        user,
-        getTopMessages(messageCount),
-      ])
-    ),
-    totalMessageCount: getTopMessages(totalMessageCount),
-  };
+
+  return data;
 }

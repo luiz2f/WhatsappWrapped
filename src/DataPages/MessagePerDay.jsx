@@ -1,5 +1,5 @@
 // import StackedBarplot from "../graphs/StackedBarplot";
-import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
+
 import StackedBarPlot from "../ui/graphs/StackedBarplot";
 function MessagePerDay({ graph, data }) {
   return (

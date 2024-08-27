@@ -1,4 +1,3 @@
-import useMessagePerPeriod from "../hooks/dataPages/useMessagePerPeriod";
 import CircularBarplot from "../ui/graphs/CircularBarPlot";
 
 function MessagePerHour({ graph, data }) {
