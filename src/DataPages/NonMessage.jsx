@@ -1,5 +1,3 @@
-import { useData } from "../context/dataContext";
-import useNonMessage from "../hooks/dataPages/useNonMessage";
 import NonMessageType from "./NonMessageType";
 
 function NonMessage({ nonMessage }) {

@@ -126,7 +126,6 @@ function DataProvider({ children }) {
   useEffect(() => {
     if (loadingStage === 4) {
       if (mensagens) {
-        console.log(mensagens);
         setColdStreak(coldStreakCalc(mensagens));
         setLoadingStage(5); // Finished loading
       }
@@ -151,6 +150,7 @@ function DataProvider({ children }) {
     </DataContext.Provider>
   );
 }
+
 function getUserColors(words) {
   let usersColors = {};
   const usersArray = Object.entries(words);
@@ -173,12 +173,4 @@ function criarUsuarios(data) {
   }
 }
 
-function useData() {
-  const context = useContext(DataContext);
-  if (context === undefined) {
-    throw new Error("useData must be used within a DataProvider");
-  }
-  return context;
-}
-
-export { DataProvider, useData };
+export { DataProvider, DataContext };

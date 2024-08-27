@@ -3,8 +3,6 @@ import MessagePerDay from "./MessagePerDay";
 import MessagePerYear from "./MessagePerYear";
 import MessagePerHour from "./MessagePerHour";
 
-import { useData } from "../context/dataContext";
-
 function WidthGraphs({ graphData }) {
   const [graph, setGraph] = useState({ w: 300, h: 300 });
   useEffect(() => {}, [graphData]);

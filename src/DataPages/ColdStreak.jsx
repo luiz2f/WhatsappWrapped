@@ -1,5 +1,3 @@
-import { useData } from "../context/dataContext";
-
 function ColdStreak({ coldStreak }) {
   const { longestStreak, startDate, endDate } = coldStreak || 0;
   return (

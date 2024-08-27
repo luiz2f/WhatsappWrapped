@@ -1,6 +1,5 @@
 import { formatNumber } from "../functions/formatNumber";
 import { userToClassName } from "../functions/userToClassName";
-import { useData } from "../context/dataContext";
 
 function MessageQuantity({ messageQuantity }) {
   const {

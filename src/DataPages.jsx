@@ -1,5 +1,4 @@
-import { useData } from "./context/dataContext";
-import { useEffect } from "react";
+import useData from "./context/useData";
 import ColdStreak from "./dataPages/ColdStreak";
 import MessageQuantity from "./dataPages/MessageQuantity";
 import MessageStreak from "./dataPages/MessageStreak";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useData } from "./context/dataContext";
 import FileInput from "./ui/FileInput";
 import Spinner from "./ui/Spinner";
+import useData from "./context/useData";
 
 function Form({ messageQuantity }) {
   const { loadingStage, setConversa } = useData();

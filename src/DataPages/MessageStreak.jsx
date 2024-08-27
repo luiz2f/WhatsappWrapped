@@ -1,5 +1,3 @@
-import { useData } from "../context/dataContext";
-
 function MessageStreak({ messageStreak }) {
   const { endDate, longestStreak, startDate } = messageStreak || {};
   return (
