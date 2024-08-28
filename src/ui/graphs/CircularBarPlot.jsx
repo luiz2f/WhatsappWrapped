@@ -1,9 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import * as d3 from "d3";
 import WatchDashes from "./WatchDashes";
-import { useQuery } from "@tanstack/react-query";
 import { userToClassName } from "../../functions/userToClassName";
-import { formatNumber } from "../../functions/formatNumber";
 
 const MARGIN = 0;
 const BAR_PADDING = 0;
@@ -16,7 +14,6 @@ export default function CircularBarplot({ width, height, data }) {
   // separa os horarios
   const groups = [...new Set(data?.map((d) => d.group))];
   // separa as categorias stack
-  const subGroups = [...new Set(data?.map((d) => d.subgroup))];
 
   // ordena de acordo com o que aparece primeiro
   const orderedSubGroups = useMemo(() => {
