@@ -1,11 +1,11 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { transformData } from "../functions/transformData";
 import { userToClassName } from "../functions/userToClassName";
-import messageCount from "../functions/dataPages/messageCount";
-import wordCount from "../functions/dataPages/wordCount";
-import mostUsedWords from "../functions/dataPages/mostUsedWords";
-import { mostUsedMessages } from "../functions/dataPages/mostUsedMessages";
-import { mostUsedEmojis } from "../functions/dataPages/mostUsedEmojis";
+import messageCount from "../functions/dataPages/messageCount.js";
+import wordCount from "../functions/dataPages/wordCount.js";
+import mostUsedWords from "../functions/dataPages/mostUsedWords.js";
+import { mostUsedMessages } from "../functions/dataPages/mostUsedMessages.js";
+import { mostUsedEmojis } from "../functions/dataPages/mostUsedEmojis.js";
 import { nonMessages as nonMessagesCalc } from "../functions/dataPages/nonMessages";
 import { messagesPerPeriod as messagesPerPeriodCalc } from "../functions/dataPages/messagesPerPeriod";
 import { messageStreak as messageStreakCalc } from "../functions/dataPages/messageStreak";
