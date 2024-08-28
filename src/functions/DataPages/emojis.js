@@ -1,6 +1,4 @@
 export function mostUsedEmojis(messages) {
-  const startTime = performance.now();
-
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return;
@@ -63,8 +61,5 @@ export function mostUsedEmojis(messages) {
   );
   // const topTotalEmojis = getTopEmojisArray(totalEmojiCount);
 
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`mostUsedEmojis: ${elapsedTime} milliseconds, ${endTime}`);
   return topUserEmojis;
 }

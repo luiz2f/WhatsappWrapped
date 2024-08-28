@@ -1,6 +1,4 @@
 export function messageStreak(data) {
-  const startTime = performance.now();
-
   if (!data) {
     console.error("Invalid messages array");
     return {
@@ -104,9 +102,6 @@ export function messageStreak(data) {
     return `${day}/${month}/${year}`;
   };
 
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`messageStreak: ${elapsedTime} milliseconds, ${endTime}`);
   return {
     longestStreak,
     startDate: formatDate(startDate),

@@ -1,6 +1,4 @@
 export function wordCount(messages) {
-  const startTime = performance.now();
-
   //CONTA AS PALAVRAS TOTAIS PARA A MENSAGEM DO MEIO, NÃO CONTA AS PALAVRAS POR USUARIO
 
   // Cria um objeto para armazenar a contagem de palavras por usuário
@@ -21,9 +19,6 @@ export function wordCount(messages) {
     }
   }
 
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`wordCount: ${elapsedTime} milliseconds, ${endTime}`);
   // Retorna o objeto com a contagem de palavras
   return wordCountPerUser;
 }

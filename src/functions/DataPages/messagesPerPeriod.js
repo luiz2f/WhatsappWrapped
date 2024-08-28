@@ -35,8 +35,6 @@ export const hourOrder = [
 ];
 
 export function messagesPerPeriod(messages, usuarios) {
-  const startTime = performance.now();
-
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {};
@@ -139,10 +137,6 @@ export function messagesPerPeriod(messages, usuarios) {
       }))
     )
     .flat();
-
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`messagesPerPeriod: ${elapsedTime} milliseconds, ${endTime}`);
 
   return {
     year: transformYearData(result.year),

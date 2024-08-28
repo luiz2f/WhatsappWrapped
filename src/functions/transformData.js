@@ -28,8 +28,6 @@ function determinarTipoMensagem(mensagem) {
 }
 
 export function transformData(data) {
-  const startTime = performance.now();
-
   if (!data) {
     console.error(data, "data transform data is false");
     return [];
@@ -84,10 +82,6 @@ export function transformData(data) {
       });
     }
   });
-
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`transformData: ${elapsedTime} milliseconds, ${endTime}`);
 
   return mensagens;
 }

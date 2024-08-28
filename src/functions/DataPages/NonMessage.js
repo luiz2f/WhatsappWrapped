@@ -1,6 +1,4 @@
 export function nonMessage(messages) {
-  const startTime = performance.now();
-
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {};
@@ -22,8 +20,6 @@ export function nonMessage(messages) {
         (userTypeCount[user][messageType] || 0) + 1;
     }
   }
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`NonMessage: ${elapsedTime} milliseconds, ${endTime}`);
+
   return userTypeCount;
 }

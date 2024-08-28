@@ -1,6 +1,4 @@
 export function mostUsedMessages(messages) {
-  const startTime = performance.now();
-
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {
@@ -55,9 +53,6 @@ export function mostUsedMessages(messages) {
       getTopMessages(messageCount),
     ])
   );
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`mostUsedMessages: ${elapsedTime} milliseconds, ${endTime}`);
 
   return data;
 }

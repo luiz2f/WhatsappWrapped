@@ -1,7 +1,4 @@
 export function mostUsedWords(messages) {
-  // console.profile("25");
-  const startTime = performance.now();
-
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {
@@ -25,7 +22,6 @@ export function mostUsedWords(messages) {
   };
 
   const userWordCount = new Map();
-  // const totalWordCount = new Map();
   const mensagensFiltradas = messages.filter(({ tipo }) => tipo === "mensagem");
   function normalizeText(text) {
     return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -63,10 +59,6 @@ export function mostUsedWords(messages) {
       getTopWordsArray(wordCountMap, 6),
     ])
   );
-  const endTime = performance.now();
-  const elapsedTime = endTime - startTime;
-  console.log(`mostUsedWords: ${elapsedTime} milliseconds, ${endTime}`);
-  // console.profileEnd("25");
 
   return data;
 }
