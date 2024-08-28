@@ -67,7 +67,7 @@ function Form({ messageQuantity }) {
             <p>
               {isLoading
                 ? "Carregando seu arquivo"
-                : "Insira arquivo .txt de seu histórico de conversa:"}
+                : "Insira o arquivo .txt de seu histórico de conversa:"}
             </p>
             {isLoading ? (
               <Spinner />
