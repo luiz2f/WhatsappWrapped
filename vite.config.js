@@ -6,6 +6,6 @@ import eslint from "vite-plugin-eslint";
 export default defineConfig({
   plugins: [react(), eslint()],
   resolve: {
-    extensions: [".js", ".jsx"], // Adiciona extensões que você deseja resolver
+    extensions: [".js", ".jsx", ".ts", ".tsx"], // Adiciona extensões que você deseja resolver
   },
 });
