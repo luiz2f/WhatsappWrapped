@@ -25,16 +25,46 @@ function DataProvider({ children }) {
 
   // 0: nenhum, 1: messageQuantity, 2: nonMessage, 3: graphData, 4: messageStreak, 5: coldStreak
   // Memoize usersColors to avoid changing on every render
-  const usersColors = useMemo(() => {
-    if (conversa) {
-      const mensagens = transformData(conversa);
+
+  useEffect(() => {
+    if (conversa && loadingStage === -1) {
+      const mensagensTransformadas = transformData(conversa);
+      setMensagens(mensagensTransformadas);
+      setLoadingStage(0); // Move to the next stage
+    }
+  }, [conversa, loadingStage]);
+  // Effect to load messageQuantity data
+  useEffect(() => {
+    if (loadingStage === 0) {
       if (mensagens) {
-        const usuarios = criarUsuarios(mensagens);
-        return getUserColors(wordCount(mensagens));
+        setMessageQuantity({
+          messageCount: messageCount(mensagens),
+          wordCount: wordCount(mensagens),
+          mostUsedWords: mostUsedWords(mensagens),
+          mostUsedMessages: mostUsedMessages(mensagens),
+          mostUsedEmojis: mostUsedEmojis(mensagens),
+        });
+        setLoadingStage(1); // Move to the next stage
       }
     }
+  }, [conversa, loadingStage, setMensagens, mensagens]);
+
+  // Effect to load nonMessage data
+  useEffect(() => {
+    if (loadingStage === 1) {
+      if (mensagens) {
+        setNonMessage(nonMessageCalc(mensagens));
+        setLoadingStage(2); // Move to the next stage
+      }
+    }
+  }, [loadingStage, mensagens]);
+  const usersColors = useMemo(() => {
+    if (messageQuantity?.messageCount) {
+      return getUserColors(messageQuantity?.messageCount);
+    }
+
     return {};
-  }, [conversa]);
+  }, [messageQuantity]);
 
   // Effect to handle CSS updates based on usersColors
   useEffect(() => {
@@ -66,40 +96,6 @@ function DataProvider({ children }) {
       };
     }
   }, [usersColors]);
-
-  useEffect(() => {
-    if (conversa && loadingStage === -1) {
-      {
-        setLoadingStage(0); // Move to the next stage
-        setMensagens(transformData(conversa));
-      }
-    }
-  }, [conversa, loadingStage, setMensagens]);
-  // Effect to load messageQuantity data
-  useEffect(() => {
-    if (loadingStage === 0) {
-      if (mensagens) {
-        setMessageQuantity({
-          messageCount: messageCount(mensagens),
-          wordCount: wordCount(mensagens),
-          mostUsedWords: mostUsedWords(mensagens),
-          mostUsedMessages: mostUsedMessages(mensagens),
-          mostUsedEmojis: mostUsedEmojis(mensagens),
-        });
-        setLoadingStage(1); // Move to the next stage
-      }
-    }
-  }, [conversa, loadingStage, setMensagens, mensagens]);
-
-  // Effect to load nonMessage data
-  useEffect(() => {
-    if (loadingStage === 1) {
-      if (mensagens) {
-        setNonMessage(nonMessageCalc(mensagens));
-        setLoadingStage(2); // Move to the next stage
-      }
-    }
-  }, [loadingStage, mensagens]);
 
   // Effect to load graphData
   useEffect(() => {

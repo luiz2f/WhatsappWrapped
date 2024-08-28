@@ -91,9 +91,24 @@ function Form({ messageQuantity }) {
                 </button>
               </>
             )}
-            <p className="git-message">Código disponível no</p>
-            <a href="#">Github</a>
           </form>
+          <div className="bottom">
+            <p className="git-message">Código disponível no</p>
+            <a
+              href="https://github.com/luiz2f/WhatsappWrapped"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Github
+            </a>
+            <p className="disclaimer-message">
+              Este não é um site oficial do WhatsApp.
+              <br /> Este projeto foi desenvolvido para fins de estudo
+              utilizando React.js.
+              <br /> Os dados que você insere são processados localmente e não
+              são compartilhados com terceiros.
+            </p>
+          </div>
         </div>
       </section>
     </>

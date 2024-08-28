@@ -22,7 +22,13 @@ function DataPages() {
         {nonMessage && (
           <>
             <p>Desenvolvido por</p>
-            <a href="https://github.com/luiz2f/">luiz2f</a>
+            <a
+              href="https://github.com/luiz2f/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              luiz2f
+            </a>
           </>
         )}
       </footer>

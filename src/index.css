@@ -103,6 +103,8 @@ h1 {
   height: 100svh;
 }
 .home > div {
+  display: grid;
+  grid-template-rows: 1fr;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -111,7 +113,8 @@ h1 {
 .home form {
   align-items: center;
   justify-content: center;
-
+  align-self: center;
+  justify-self: center;
   display: flex;
   flex-direction: column;
 }
@@ -645,4 +648,20 @@ footer p {
     flex-direction: column;
     gap: 24px;
   }
+}
+.disclaimer-message {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 95%;
+  font-size: 12px;
+  text-align: center;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  align-self: end;
+  height: fit-content;
 }
