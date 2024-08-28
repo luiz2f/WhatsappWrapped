@@ -1,9 +1,11 @@
+import { lazy, Suspense } from "react";
 import useData from "./context/useData";
-import ColdStreak from "./dataPages/ColdStreak";
 import MessageQuantity from "./dataPages/MessageQuantity";
-import MessageStreak from "./dataPages/MessageStreak";
-import WidthGraphs from "./dataPages/WidthGraphs";
-import NonMessage from "./dataPages/NonMessage";
+import Spinner from "./ui/Spinner";
+const NonMessage = lazy(() => import("./dataPages/NonMessage"));
+const WidthGraphs = lazy(() => import("./dataPages/WidthGraphs"));
+const MessageStreak = lazy(() => import("./dataPages/MessageStreak"));
+const ColdStreak = lazy(() => import("./dataPages/ColdStreak"));
 
 function DataPages() {
   const { messageQuantity, nonMessage, graphData, messageStreak, coldStreak } =
@@ -12,11 +14,12 @@ function DataPages() {
   return (
     <>
       {messageQuantity && <MessageQuantity messageQuantity={messageQuantity} />}
-      {nonMessage && <NonMessage nonMessage={nonMessage} />}
-      {graphData && <WidthGraphs graphData={graphData} />}
-      {messageStreak && <MessageStreak messageStreak={messageStreak} />}
-      {coldStreak && <ColdStreak coldStreak={coldStreak} />}
-
+      <Suspense fallback={<Spinner />}>
+        {nonMessage && <NonMessage nonMessage={nonMessage} />}
+        {graphData && <WidthGraphs graphData={graphData} />}
+        {messageStreak && <MessageStreak messageStreak={messageStreak} />}
+        {coldStreak && <ColdStreak coldStreak={coldStreak} />}
+      </Suspense>
       <footer>
         {" "}
         {nonMessage && (
