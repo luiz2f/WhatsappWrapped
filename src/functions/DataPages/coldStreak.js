@@ -8,7 +8,6 @@ export function coldStreak(data) {
     };
   }
 
-  // Checa os primeiros 5 objetos
   const primeiraMensagem = data[0];
   const [primeiraParte] = primeiraMensagem.dataHora.split(",")[0];
   const isDataAntes = /\d{2}\/\d{2}\/\d{4}/.test(primeiraParte.trim()) ? 1 : 0;

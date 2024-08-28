@@ -6,7 +6,6 @@ export function mostUsedWords(messages) {
     };
   }
 
-  // Função para aplicar fator de contagem com base no comprimento da palavra
   const applyLengthFactor = (word) => {
     const size = word.length;
     if (size === 4) return 0.5;
@@ -15,7 +14,6 @@ export function mostUsedWords(messages) {
     return 1; // Palavra com comprimento menor que 4 recebe fator 1
   };
 
-  // Função para verificar se uma palavra deve ser ignorada
   const shouldIgnoreWord = (cleanedWord) => {
     const kCount = (cleanedWord.match(/k/gi) || []).length; // Conta o número de 'k'
     return kCount > 3; // Ignora se a palavra contiver mais de 3 'k'

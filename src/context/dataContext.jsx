@@ -1,15 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { transformData } from "../functions/transformData";
-import { wordCount } from "../functions/dataPages/wordCount";
-import { mostUsedEmojis } from "../functions/dataPages/emojis";
-import { mostUsedWords } from "../functions/dataPages/mostUsedWords";
-import { mostUsedMessages } from "../functions/dataPages/mostUsedMessages";
-import { nonMessage as nonMessageCalc } from "../functions/dataPages/nonMessage";
-import { messagesPerPeriod } from "../functions/dataPages/messagesPerPeriod";
-import { messageStreak as messageStreakCalc } from "../functions/dataPages/messageStreak";
-import { coldStreak as coldStreakCalc } from "../functions/dataPages/coldStreak";
 import { userToClassName } from "../functions/userToClassName";
 import { messageCount } from "../functions/dataPages/messageCount";
+import { wordCount } from "../functions/dataPages/wordCount";
+import { mostUsedWords } from "../functions/dataPages/mostUsedWords";
+import { mostUsedMessages } from "../functions/dataPages/mostUsedMessages";
+import { mostUsedEmojis } from "../functions/dataPages/mostUsedEmojis";
+import { nonMessages as nonMessagesCalc } from "../functions/dataPages/nonMessages";
+import { messagesPerPeriod as messagesPerPeriodCalc } from "../functions/dataPages/messagesPerPeriod";
+import { messageStreak as messageStreakCalc } from "../functions/dataPages/messageStreak";
+import { coldStreak as coldStreakCalc } from "../functions/dataPages/coldStreak";
 
 const DataContext = createContext(); // Nome do Context deve ser com letra maiúscula
 
@@ -53,7 +53,7 @@ function DataProvider({ children }) {
   useEffect(() => {
     if (loadingStage === 1) {
       if (mensagens) {
-        setNonMessage(nonMessageCalc(mensagens));
+        setNonMessage(nonMessagesCalc(mensagens));
         setLoadingStage(2); // Move to the next stage
       }
     }
@@ -102,7 +102,7 @@ function DataProvider({ children }) {
     if (loadingStage === 2) {
       if (mensagens) {
         const usuarios = criarUsuarios(mensagens);
-        setGraphData(messagesPerPeriod(mensagens, usuarios));
+        setGraphData(messagesPerPeriodCalc(mensagens, usuarios));
         setLoadingStage(3); // Move to the next stage
       }
     }

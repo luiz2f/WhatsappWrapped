@@ -1,10 +1,9 @@
-export function nonMessage(messages) {
+export function nonMessages(messages) {
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {};
   }
 
-  // Contadores de tipos de mensagens por usuário
   const userTypeCount = {};
 
   for (const message of messages) {

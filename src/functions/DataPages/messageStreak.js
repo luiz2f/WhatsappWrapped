@@ -7,7 +7,6 @@ export function messageStreak(data) {
       endDate: null,
     };
   }
-  // Checa os primeiros 5 objetos
   const primeiraMensagem = data[0];
   const [primeiraParte] = primeiraMensagem.dataHora.split(",")[0];
   const isDataAntes = /\d{2}\/\d{2}\/\d{4}/.test(primeiraParte.trim()) ? 1 : 0;
@@ -16,12 +15,10 @@ export function messageStreak(data) {
   const length = data.length;
   const extrairData = (dataHora) => dataHora.split(",")[isDataAntes].trim();
 
-  // Mapeia todo o array usando a lógica decidida
   for (let i = 0; i < length; i++) {
     const dataHora = data[i]?.dataHora;
     const dataHoraAnterior = i > 0 ? data[i - 1]?.dataHora : null;
 
-    // Extrai a data das strings dataHora e dataHoraAnterior
     const dataAtual = extrairData(dataHora);
     const dataAnterior = dataHoraAnterior
       ? extrairData(dataHoraAnterior)
@@ -32,16 +29,13 @@ export function messageStreak(data) {
     }
   }
 
-  // Função para converter data no formato "dd/mm/yyyy" para objeto Date
   const parseDate = (dateStr) => {
     const [day, month, year] = dateStr.split("/").map(Number);
     return new Date(year, month - 1, day); // Os meses são baseados em zero
   };
 
-  // Criar um conjunto para armazenar todas as datas únicas
   const datesSet = new Set();
 
-  // Função para formatar data no formato "dd/mm/yyyy"
   for (const message of messages) {
     const dateStr = message; // Aqui assumimos que `message` é a string da data
     if (dateStr) {
@@ -50,7 +44,6 @@ export function messageStreak(data) {
     }
   }
 
-  // Converter o conjunto para um array e ordenar
   const sortedDates = Array.from(datesSet)
     .map((dateStr) => new Date(dateStr))
     .sort((a, b) => a - b);
@@ -89,7 +82,6 @@ export function messageStreak(data) {
     }
   }
 
-  // Verifica a última sequência
   if (currentStreak > longestStreak) {
     longestStreak = currentStreak;
     endDate = sortedDates[datesSize - 1];

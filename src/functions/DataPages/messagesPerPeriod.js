@@ -141,6 +141,6 @@ export function messagesPerPeriod(messages, usuarios) {
   return {
     year: transformYearData(result.year),
     day: transformWeekDayData(sortedDays),
-    hour: newHour, // Agora é uma array
+    hour: newHour,
   };
 }
