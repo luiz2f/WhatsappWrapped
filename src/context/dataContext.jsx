@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { transformData } from "../functions/transformData";
-import { messageCount } from "../functions/dataPages/messageCount";
 import { wordCount } from "../functions/dataPages/wordCount";
 import { mostUsedEmojis } from "../functions/dataPages/emojis";
 import { mostUsedWords } from "../functions/dataPages/mostUsedWords";
@@ -10,6 +9,7 @@ import { messagesPerPeriod } from "../functions/dataPages/messagesPerPeriod";
 import { messageStreak as messageStreakCalc } from "../functions/dataPages/messageStreak";
 import { coldStreak as coldStreakCalc } from "../functions/dataPages/coldStreak";
 import { userToClassName } from "../functions/userToClassName";
+import { messageCount } from "../functions/dataPages/messageCount";
 
 const DataContext = createContext(); // Nome do Context deve ser com letra maiúscula
 
