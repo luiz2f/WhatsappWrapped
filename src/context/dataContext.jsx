@@ -1,9 +1,9 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useMemo, useState } from "react";
 import { transformData } from "../functions/transformData";
 import { userToClassName } from "../functions/userToClassName";
-import { messageCount } from "../functions/dataPages/messageCount";
-import { wordCount } from "../functions/dataPages/wordCount";
-import { mostUsedWords } from "../functions/dataPages/mostUsedWords";
+import messageCount from "../functions/dataPages/messageCount";
+import wordCount from "../functions/dataPages/wordCount";
+import mostUsedWords from "../functions/dataPages/mostUsedWords";
 import { mostUsedMessages } from "../functions/dataPages/mostUsedMessages";
 import { mostUsedEmojis } from "../functions/dataPages/mostUsedEmojis";
 import { nonMessages as nonMessagesCalc } from "../functions/dataPages/nonMessages";

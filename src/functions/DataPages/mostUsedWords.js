@@ -1,4 +1,4 @@
-export function mostUsedWords(messages) {
+export default function mostUsedWords(messages) {
   if (!messages || !Array.isArray(messages)) {
     console.error("Invalid messages array");
     return {

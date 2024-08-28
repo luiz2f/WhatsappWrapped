@@ -1,4 +1,4 @@
-export function wordCount(messages) {
+export default function wordCount(messages) {
   const wordCountPerUser = {};
 
   for (const message of messages) {
