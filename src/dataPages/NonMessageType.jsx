@@ -15,19 +15,28 @@ function NonMessageType({ data, type, title }) {
 
         <div className="box">
           {data &&
-            Object.entries(data).map(([key, value]) => (
-              <div className="message" key={key}>
-                <h4 className="messagesender">{key}</h4>
-                <h4>
-                  {formatNumber(value[type])}
-                  <span>({percent(value[type] / totalType)})</span>
-                </h4>
-                <p>
-                  enviou 1 {type.toLowerCase()} a cada{" "}
-                  {Math.floor(value.mensagem / value[type])} mensagens
-                </p>
-              </div>
-            ))}
+            Object.entries(data).map(([key, value]) => {
+              const percentData = value[type] / totalType;
+              return (
+                <div className="message" key={key}>
+                  <h4 className="messagesender">{key}</h4>
+                  <h4>
+                    {formatNumber(value[type])}
+                    {percentData ? <span>({percent(percentData)})</span> : ""}
+                  </h4>
+                  <p>
+                    {percentData ? (
+                      <>
+                        enviou 1 {type.toLowerCase()} a cada{" "}
+                        {Math.floor(value.mensagem / value[type])} mensagens
+                      </>
+                    ) : (
+                      "Enviadas 🙁"
+                    )}
+                  </p>
+                </div>
+              );
+            })}
         </div>
       </div>
     </section>

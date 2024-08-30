@@ -1,16 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import * as d3 from "d3";
-import {
-  Bar,
-  BarChart,
-  CartesianGrid,
-  Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
 import { userToClassName } from "../../functions/userToClassName";
-import { formatNumber } from "../../functions/formatNumber";
+import { Bar, BarChart, CartesianGrid, Legend, XAxis, YAxis } from "recharts";
 
 function StackedBarPlot({ graph, data }) {
   const hoverBox = useRef(null);

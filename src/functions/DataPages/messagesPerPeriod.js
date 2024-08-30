@@ -48,7 +48,8 @@ export function messagesPerPeriod(messages, usuarios) {
   const primeiraMensagem = messages[0];
   const delimitador = primeiraMensagem.dataHora.includes(",") ? "," : " ";
   const [primeiraParte] = primeiraMensagem.dataHora.split(delimitador)[0];
-  const isDataAntes = /\d{2}\/\d{2}\/\d{4}/.test(primeiraParte.trim()) ? 1 : 0;
+  const isDataAntes = /\d{2}\/\d{2}\/\d{4}/.test(primeiraParte.trim()) ? 0 : 1;
+  const oppositeIndex = isDataAntes === 0 ? 1 : 0;
 
   for (const message of messages) {
     const user = message.usuario?.trim();
@@ -57,15 +58,13 @@ export function messagesPerPeriod(messages, usuarios) {
 
     if (user && dataHora && type) {
       // Extrair data e hora
-      const date = dataHora.split(delimitador)[isDataAntes];
+      const date = dataHora.split(delimitador)[oppositeIndex];
       const time = dataHora.split(delimitador)[isDataAntes];
       const [day, month, year] = date.split("/").map(Number);
-      const [hour] = time.split(":");
-
+      const hour = time.split(":")[0].trim();
       // Mapeia o dia da semana
       const dateObj = new Date(year, month - 1, day);
       const dayOfWeek = dayOrder[dateObj.getDay()];
-
       if (dayOfWeek && hour) {
         if (!result.year[year]) {
           result.year[year] = {};
@@ -142,7 +141,6 @@ export function messagesPerPeriod(messages, usuarios) {
       }))
     )
     .flat();
-
   return {
     year: transformYearData(result.year),
     day: transformWeekDayData(sortedDays),
