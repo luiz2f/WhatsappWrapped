@@ -45,6 +45,10 @@ export function messagesPerPeriod(messages, usuarios) {
     day: {},
     hour: [],
   };
+  const primeiraMensagem = messages[0];
+  const delimitador = primeiraMensagem.dataHora.includes(",") ? "," : " ";
+  const [primeiraParte] = primeiraMensagem.dataHora.split(delimitador)[0];
+  const isDataAntes = /\d{2}\/\d{2}\/\d{4}/.test(primeiraParte.trim()) ? 1 : 0;
 
   for (const message of messages) {
     const user = message.usuario?.trim();
@@ -53,7 +57,8 @@ export function messagesPerPeriod(messages, usuarios) {
 
     if (user && dataHora && type) {
       // Extrair data e hora
-      const [date, time] = dataHora.split(", ");
+      const date = dataHora.split(delimitador)[isDataAntes];
+      const time = dataHora.split(delimitador)[isDataAntes];
       const [day, month, year] = date.split("/").map(Number);
       const [hour] = time.split(":");
 

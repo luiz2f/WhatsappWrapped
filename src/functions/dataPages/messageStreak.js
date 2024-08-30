@@ -8,12 +8,14 @@ export function messageStreak(data) {
     };
   }
   const primeiraMensagem = data[0];
-  const [primeiraParte] = primeiraMensagem.dataHora.split(",")[0];
+  const delimitador = primeiraMensagem.dataHora.includes(",") ? "," : " ";
+  const [primeiraParte] = primeiraMensagem.dataHora.split(delimitador)[0];
   const isDataAntes = /\d{2}\/\d{2}\/\d{4}/.test(primeiraParte.trim()) ? 1 : 0;
 
   const messages = [];
   const length = data.length;
-  const extrairData = (dataHora) => dataHora.split(",")[isDataAntes].trim();
+  const extrairData = (dataHora) =>
+    dataHora.split(delimitador)[isDataAntes].trim();
 
   for (let i = 0; i < length; i++) {
     const dataHora = data[i]?.dataHora;
