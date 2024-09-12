@@ -3,14 +3,15 @@ const regexUsuario = /] (.+?):/;
 const regexMensagem = /: (.+)/;
 const regexConteudoColchetes = /\[(.+?)\]/;
 const regexTipos = {
-  imagem: /imagem ocultada/,
-  figurinha: /figurinha omitida/,
-  audio: /áudio ocultado/,
+  imagem: /imagem ocultada|image omitted/,
+  figurinha: /figurinha omitida|sticker omitted/,
+  audio: /áudio ocultado|audio omitted/,
   video: /vídeo omitido/,
   gif: /GIF omitido/,
   documento: /documento omitido$/,
   ligacao: /^Ligação de voz/,
   contato: /Cartão do contato omitido/,
+  naoIdentificado: / omitted/, // Captura qualquer tipo de mensagem omitida não categorizada
 };
 const regexRemoveAndReplace = /[\u200E$`]|(?<=\])\n(?![\[])/g;
 
